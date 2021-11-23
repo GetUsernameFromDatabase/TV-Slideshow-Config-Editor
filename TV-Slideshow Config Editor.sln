@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV-Slideshow Config Editor", "TV-Slideshow Config Editor.csproj", "{E73A8C95-550E-4145-8A0D-EE75F0C9CD8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E73A8C95-550E-4145-8A0D-EE75F0C9CD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E73A8C95-550E-4145-8A0D-EE75F0C9CD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E73A8C95-550E-4145-8A0D-EE75F0C9CD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E73A8C95-550E-4145-8A0D-EE75F0C9CD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3A1D1C9-2EF6-4628-B614-949AEF37ABC3}
+	EndGlobalSection
+EndGlobal
