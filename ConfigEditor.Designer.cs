@@ -32,6 +32,8 @@ namespace TV_Slideshow_Config_Editor
             this.TabControl_MainConfig = new System.Windows.Forms.TabControl();
             this.TabPage_Defaults = new System.Windows.Forms.TabPage();
             this.TabPage_TimeDisplay = new System.Windows.Forms.TabPage();
+            this.TabPage_Sites = new System.Windows.Forms.TabPage();
+            this.TabPage_Notifications = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFile_Open = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,8 +42,6 @@ namespace TV_Slideshow_Config_Editor
             this.MenuFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.TabPage_Sites = new System.Windows.Forms.TabPage();
-            this.TabPage_Notifications = new System.Windows.Forms.TabPage();
             this.TabControl_MainConfig.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +80,24 @@ namespace TV_Slideshow_Config_Editor
             this.TabPage_TimeDisplay.Text = "Show Time";
             this.TabPage_TimeDisplay.UseVisualStyleBackColor = true;
             // 
+            // TabPage_Sites
+            // 
+            this.TabPage_Sites.Location = new System.Drawing.Point(4, 22);
+            this.TabPage_Sites.Name = "TabPage_Sites";
+            this.TabPage_Sites.Size = new System.Drawing.Size(792, 400);
+            this.TabPage_Sites.TabIndex = 2;
+            this.TabPage_Sites.Text = "Sites";
+            this.TabPage_Sites.UseVisualStyleBackColor = true;
+            // 
+            // TabPage_Notifications
+            // 
+            this.TabPage_Notifications.Location = new System.Drawing.Point(4, 22);
+            this.TabPage_Notifications.Name = "TabPage_Notifications";
+            this.TabPage_Notifications.Size = new System.Drawing.Size(792, 400);
+            this.TabPage_Notifications.TabIndex = 3;
+            this.TabPage_Notifications.Text = "Notifications";
+            this.TabPage_Notifications.UseVisualStyleBackColor = true;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -104,27 +122,28 @@ namespace TV_Slideshow_Config_Editor
             // MenuFile_Open
             // 
             this.MenuFile_Open.Name = "MenuFile_Open";
-            this.MenuFile_Open.Size = new System.Drawing.Size(180, 22);
+            this.MenuFile_Open.Size = new System.Drawing.Size(123, 22);
             this.MenuFile_Open.Text = "Open...";
             this.MenuFile_Open.Click += new System.EventHandler(this.MenuFile_Open_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(120, 6);
             // 
             // MenuFile_Save
             // 
             this.MenuFile_Save.Enabled = false;
             this.MenuFile_Save.Name = "MenuFile_Save";
-            this.MenuFile_Save.Size = new System.Drawing.Size(180, 22);
+            this.MenuFile_Save.Size = new System.Drawing.Size(123, 22);
             this.MenuFile_Save.Text = "Save...";
+            this.MenuFile_Save.Click += new System.EventHandler(this.MenuFile_Save_Click);
             // 
             // MenuFile_SaveAs
             // 
             this.MenuFile_SaveAs.Enabled = false;
             this.MenuFile_SaveAs.Name = "MenuFile_SaveAs";
-            this.MenuFile_SaveAs.Size = new System.Drawing.Size(180, 22);
+            this.MenuFile_SaveAs.Size = new System.Drawing.Size(123, 22);
             this.MenuFile_SaveAs.Text = "Save As...";
             this.MenuFile_SaveAs.Click += new System.EventHandler(this.MenuFile_SaveAs_Click);
             // 
@@ -140,24 +159,6 @@ namespace TV_Slideshow_Config_Editor
             this.saveFileDialog1.DefaultExt = "json";
             this.saveFileDialog1.FileName = "config.json";
             this.saveFileDialog1.Filter = "JSON Files|*.json";
-            // 
-            // TabPage_Sites
-            // 
-            this.TabPage_Sites.Location = new System.Drawing.Point(4, 22);
-            this.TabPage_Sites.Name = "TabPage_Sites";
-            this.TabPage_Sites.Size = new System.Drawing.Size(792, 400);
-            this.TabPage_Sites.TabIndex = 2;
-            this.TabPage_Sites.Text = "Sites";
-            this.TabPage_Sites.UseVisualStyleBackColor = true;
-            // 
-            // TabPage_Notifications
-            // 
-            this.TabPage_Notifications.Location = new System.Drawing.Point(4, 22);
-            this.TabPage_Notifications.Name = "TabPage_Notifications";
-            this.TabPage_Notifications.Size = new System.Drawing.Size(792, 400);
-            this.TabPage_Notifications.TabIndex = 3;
-            this.TabPage_Notifications.Text = "Notifications";
-            this.TabPage_Notifications.UseVisualStyleBackColor = true;
             // 
             // ConfigEditor
             // 

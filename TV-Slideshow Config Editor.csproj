@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JSONManipulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileManipulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ConfigEditor.cs">
       <SubType>Form</SubType>
     </Compile>

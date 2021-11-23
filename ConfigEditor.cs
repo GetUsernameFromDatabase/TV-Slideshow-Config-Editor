@@ -1,55 +1,54 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace TV_Slideshow_Config_Editor
 {
     public partial class ConfigEditor : Form
     {
-        public string filePath { get; private set; }
-        public Object ConfigJSON { get; private set; }
-
         public ConfigEditor()
         {
             InitializeComponent();
+            TabPage_Defaults.Controls.Add(new JSONNumber("defaults.site", "Site"));
+        }
+    }
+
+    public class JSONNumber : TableLayoutPanel
+    {
+        public JSONNumber(string locator, string label)
+        {
+            this.RowCount = 1;
+            this.ColumnCount = 2;
+            this.AutoSize = true;
+
+            var controlLabel = new Label()
+            {
+                Text = label,
+                TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+            };
+
+            var controlEdit = new MaskedTextBox()
+            {
+                Dock = DockStyle.Fill,
+                AsciiOnly = true
+
+            };
+            controlEdit.TextChanged += new EventHandler(EditControl_TextChanged);
+
+            this.Controls.Add(controlLabel);
+            this.Controls.Add(controlEdit);
+
         }
 
-        private void MenuFile_Open_Click(object sender, EventArgs e)
+        protected void EditControl_TextChanged(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                //Get the path of specified file
-                this.filePath = openFileDialog1.FileName;
-                var fileStream = openFileDialog1.OpenFile();
+            var rgx = new Regex(@"\D");
+            var c = (sender as MaskedTextBox);
+            var selectionStart = c.SelectionStart;
+            var textLength = c.Text.Length;
 
-                //Read the contents of the file into a stream
-                using (StreamReader reader = new StreamReader(fileStream))
-                    this.ConfigJSON = JsonConvert.DeserializeObject(reader.ReadToEnd());
-
-                MenuFile_Save.Enabled = MenuFile_SaveAs.Enabled = true;
-            }
-        }
-
-        private void MenuFile_SaveAs_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                // Code to write the stream goes here.
-                this.filePath = saveFileDialog1.FileName;
-                var fileContent = JsonConvert.SerializeObject(this.ConfigJSON, Formatting.Indented);
-
-                using (StreamWriter file = new StreamWriter(this.filePath))
-                    file.Write(fileContent);
-            }
+            c.Text = rgx.Replace(c.Text, "");
+            c.SelectionStart = selectionStart - ((textLength > c.Text.Length) ? 1 : 0);
         }
     }
 }
