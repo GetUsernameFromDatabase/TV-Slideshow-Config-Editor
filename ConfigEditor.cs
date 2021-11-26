@@ -1,6 +1,6 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Newtonsoft.Json.Schema;
 
 namespace TV_Slideshow_Config_Editor
 {
@@ -9,46 +9,14 @@ namespace TV_Slideshow_Config_Editor
         public ConfigEditor()
         {
             InitializeComponent();
-            TabPage_Defaults.Controls.Add(new JSONNumber("defaults.site", "Site"));
-        }
-    }
-
-    public class JSONNumber : TableLayoutPanel
-    {
-        public JSONNumber(string locator, string label)
-        {
-            this.RowCount = 1;
-            this.ColumnCount = 2;
-            this.AutoSize = true;
-
-            var controlLabel = new Label()
-            {
-                Text = label,
-                TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
-            };
-
-            var controlEdit = new MaskedTextBox()
-            {
-                Dock = DockStyle.Fill,
-                AsciiOnly = true
-
-            };
-            controlEdit.TextChanged += new EventHandler(EditControl_TextChanged);
-
-            this.Controls.Add(controlLabel);
-            this.Controls.Add(controlEdit);
-
+            this.Schema = JSchema.Parse(Properties.Resources.ConfigSchema);
         }
 
-        protected void EditControl_TextChanged(object sender, EventArgs e)
+        private void UpdateMenuButtonStatuses()
         {
-            var rgx = new Regex(@"\D");
-            var c = (sender as MaskedTextBox);
-            var selectionStart = c.SelectionStart;
-            var textLength = c.Text.Length;
-
-            c.Text = rgx.Replace(c.Text, "");
-            c.SelectionStart = selectionStart - ((textLength > c.Text.Length) ? 1 : 0);
+            TabControl_MainConfig.Enabled = MenuFile_SaveAs.Enabled =
+                this.ConfigJSON != null;
+            MenuFile_Save.Enabled = this.FilePath != null;
         }
     }
 }

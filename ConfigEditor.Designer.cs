@@ -36,13 +36,22 @@ namespace TV_Slideshow_Config_Editor
             this.TabPage_Notifications = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Defaults_FlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.TimeDisplay_FlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.Sites_FlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.Notifications_FlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.TabControl_MainConfig.SuspendLayout();
+            this.TabPage_Defaults.SuspendLayout();
+            this.TabPage_TimeDisplay.SuspendLayout();
+            this.TabPage_Sites.SuspendLayout();
+            this.TabPage_Notifications.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +62,7 @@ namespace TV_Slideshow_Config_Editor
             this.TabControl_MainConfig.Controls.Add(this.TabPage_Sites);
             this.TabControl_MainConfig.Controls.Add(this.TabPage_Notifications);
             this.TabControl_MainConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabControl_MainConfig.Enabled = false;
             this.TabControl_MainConfig.HotTrack = true;
             this.TabControl_MainConfig.Location = new System.Drawing.Point(0, 24);
             this.TabControl_MainConfig.Name = "TabControl_MainConfig";
@@ -62,9 +72,9 @@ namespace TV_Slideshow_Config_Editor
             // 
             // TabPage_Defaults
             // 
+            this.TabPage_Defaults.Controls.Add(this.Defaults_FlowPanel);
             this.TabPage_Defaults.Location = new System.Drawing.Point(4, 22);
             this.TabPage_Defaults.Name = "TabPage_Defaults";
-            this.TabPage_Defaults.Padding = new System.Windows.Forms.Padding(3);
             this.TabPage_Defaults.Size = new System.Drawing.Size(792, 400);
             this.TabPage_Defaults.TabIndex = 0;
             this.TabPage_Defaults.Text = "Defaults";
@@ -72,9 +82,9 @@ namespace TV_Slideshow_Config_Editor
             // 
             // TabPage_TimeDisplay
             // 
+            this.TabPage_TimeDisplay.Controls.Add(this.TimeDisplay_FlowPanel);
             this.TabPage_TimeDisplay.Location = new System.Drawing.Point(4, 22);
             this.TabPage_TimeDisplay.Name = "TabPage_TimeDisplay";
-            this.TabPage_TimeDisplay.Padding = new System.Windows.Forms.Padding(3);
             this.TabPage_TimeDisplay.Size = new System.Drawing.Size(792, 400);
             this.TabPage_TimeDisplay.TabIndex = 1;
             this.TabPage_TimeDisplay.Text = "Show Time";
@@ -82,6 +92,7 @@ namespace TV_Slideshow_Config_Editor
             // 
             // TabPage_Sites
             // 
+            this.TabPage_Sites.Controls.Add(this.Sites_FlowPanel);
             this.TabPage_Sites.Location = new System.Drawing.Point(4, 22);
             this.TabPage_Sites.Name = "TabPage_Sites";
             this.TabPage_Sites.Size = new System.Drawing.Size(792, 400);
@@ -91,6 +102,7 @@ namespace TV_Slideshow_Config_Editor
             // 
             // TabPage_Notifications
             // 
+            this.TabPage_Notifications.Controls.Add(this.Notifications_FlowPanel);
             this.TabPage_Notifications.Location = new System.Drawing.Point(4, 22);
             this.TabPage_Notifications.Name = "TabPage_Notifications";
             this.TabPage_Notifications.Size = new System.Drawing.Size(792, 400);
@@ -111,6 +123,7 @@ namespace TV_Slideshow_Config_Editor
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
             this.MenuFile_Open,
             this.toolStripSeparator1,
             this.MenuFile_Save,
@@ -118,6 +131,13 @@ namespace TV_Slideshow_Config_Editor
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.newToolStripMenuItem.Text = "New...";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.MenuFile_New_Click);
             // 
             // MenuFile_Open
             // 
@@ -160,6 +180,42 @@ namespace TV_Slideshow_Config_Editor
             this.saveFileDialog1.FileName = "config.json";
             this.saveFileDialog1.Filter = "JSON Files|*.json";
             // 
+            // Defaults_FlowPanel
+            // 
+            this.Defaults_FlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Defaults_FlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.Defaults_FlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.Defaults_FlowPanel.Name = "Defaults_FlowPanel";
+            this.Defaults_FlowPanel.Size = new System.Drawing.Size(792, 400);
+            this.Defaults_FlowPanel.TabIndex = 0;
+            // 
+            // TimeDisplay_FlowPanel
+            // 
+            this.TimeDisplay_FlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TimeDisplay_FlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.TimeDisplay_FlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.TimeDisplay_FlowPanel.Name = "TimeDisplay_FlowPanel";
+            this.TimeDisplay_FlowPanel.Size = new System.Drawing.Size(792, 400);
+            this.TimeDisplay_FlowPanel.TabIndex = 1;
+            // 
+            // Sites_FlowPanel
+            // 
+            this.Sites_FlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Sites_FlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.Sites_FlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.Sites_FlowPanel.Name = "Sites_FlowPanel";
+            this.Sites_FlowPanel.Size = new System.Drawing.Size(792, 400);
+            this.Sites_FlowPanel.TabIndex = 2;
+            // 
+            // Notifications_FlowPanel
+            // 
+            this.Notifications_FlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Notifications_FlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.Notifications_FlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.Notifications_FlowPanel.Name = "Notifications_FlowPanel";
+            this.Notifications_FlowPanel.Size = new System.Drawing.Size(792, 400);
+            this.Notifications_FlowPanel.TabIndex = 3;
+            // 
             // ConfigEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +227,10 @@ namespace TV_Slideshow_Config_Editor
             this.Name = "ConfigEditor";
             this.Text = "TV Slideshow Config Editor";
             this.TabControl_MainConfig.ResumeLayout(false);
+            this.TabPage_Defaults.ResumeLayout(false);
+            this.TabPage_TimeDisplay.ResumeLayout(false);
+            this.TabPage_Sites.ResumeLayout(false);
+            this.TabPage_Notifications.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -193,6 +253,11 @@ namespace TV_Slideshow_Config_Editor
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TabPage TabPage_Sites;
         private System.Windows.Forms.TabPage TabPage_Notifications;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel Defaults_FlowPanel;
+        private System.Windows.Forms.FlowLayoutPanel TimeDisplay_FlowPanel;
+        private System.Windows.Forms.FlowLayoutPanel Sites_FlowPanel;
+        private System.Windows.Forms.FlowLayoutPanel Notifications_FlowPanel;
     }
 }
 

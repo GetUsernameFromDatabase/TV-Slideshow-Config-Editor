@@ -8,9 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-namespace TV_Slideshow_Config_Editor.Properties
-{
+namespace TV_Slideshow_Config_Editor.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -18,52 +19,100 @@ namespace TV_Slideshow_Config_Editor.Properties
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TV_Slideshow_Config_Editor.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &apos;description&apos;: &apos;TV Slideshow Config&apos;,
+        ///  &apos;type&apos;: &apos;object&apos;,
+        ///  &apos;properties&apos;: {
+        ///    &apos;defaults&apos;: {
+        ///      &apos;type&apos;: &apos;object&apos;,
+        ///      &apos;properties&apos;: {
+        ///        &apos;durations&apos;: {
+        ///          &apos;type&apos;: &apos;object&apos;,
+        ///          &apos;properties&apos;: {
+        ///            &apos;site&apos;: {
+        ///              &apos;type&apos;: &apos;integer&apos;
+        ///            },
+        ///            &apos;slide&apos;: {
+        ///              &apos;type&apos;: &apos;integer&apos;
+        ///            },
+        ///            &apos;notification&apos;: {
+        ///              &apos;type&apos;: &apos;integer&apos;
+        ///            }
+        ///          },
+        ///          &apos;required&apos;: [
+        ///            &apos;site&apos; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ConfigSchema {
+            get {
+                return ResourceManager.GetString("ConfigSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;defaults&quot;: {
+        ///    &quot;durations&quot;: {
+        ///      &quot;site&quot;: 50,
+        ///      &quot;slide&quot;: 15,
+        ///      &quot;notification&quot;: 60
+        ///    }
+        ///  },
+        ///  &quot;showTime&quot;: {
+        ///    &quot;duration&quot;: 2,
+        ///    &quot;interval&quot;: 5
+        ///  },
+        ///  &quot;sites&quot;: [
+        ///    {
+        ///      &quot;url&quot;: &quot;/001SlideShow/html/index.html&quot;
+        ///    }
+        ///  ],
+        ///}.
+        /// </summary>
+        internal static string DefaultJSON {
+            get {
+                return ResourceManager.GetString("DefaultJSON", resourceCulture);
             }
         }
     }
