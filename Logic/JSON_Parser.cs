@@ -18,9 +18,9 @@ namespace TV_Slideshow_Config_Editor
                     controls.Add(ControlMaker(parameter as JProperty));
                 else
                 {
-                    var container = new FlowLayoutPanel()
+                    var container = new TableLayoutPanel()
                     {
-                        FlowDirection = FlowDirection.TopDown,
+                        GrowStyle = TableLayoutPanelGrowStyle.AddColumns,
                         AutoSize = true,
                         BorderStyle = BorderStyle.FixedSingle,
                     };
