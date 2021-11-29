@@ -10,12 +10,17 @@ namespace TV_Slideshow_Config_Editor
         {
             InitializeComponent();
             this.Schema = JSchema.Parse(Properties.Resources.ConfigSchema);
+
+            TabPage_Defaults.Tag = Properties.Resources.ConfigDefaultsTag;
+            TabPage_TimeDisplay.Tag = Properties.Resources.ConfigTimeDisplayTag;
+            TabPage_Sites.Tag = Properties.Resources.ConfigSitesTag;
+            TabPage_Notifications.Tag = Properties.Resources.ConfigNotificationsTag;
         }
 
         private void UpdateMenuButtonStatuses()
         {
             TabControl_MainConfig.Enabled = MenuFile_SaveAs.Enabled =
-                this.ConfigJSON != null;
+                this.Config != null;
             MenuFile_Save.Enabled = this.FilePath != null;
         }
 

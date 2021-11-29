@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TV_Slideshow_Config_Editor
+namespace TV_Slideshow_Config_Editor.Logic
 {
     struct String_Manipulation
     {

@@ -61,6 +61,24 @@ namespace TV_Slideshow_Config_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Defaults.
+        /// </summary>
+        internal static string ConfigDefaultsTag {
+            get {
+                return ResourceManager.GetString("ConfigDefaultsTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        internal static string ConfigNotificationsTag {
+            get {
+                return ResourceManager.GetString("ConfigNotificationsTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///  &apos;description&apos;: &apos;TV Slideshow Config&apos;,
         ///  &apos;type&apos;: &apos;object&apos;,
@@ -87,6 +105,24 @@ namespace TV_Slideshow_Config_Editor.Properties {
         internal static string ConfigSchema {
             get {
                 return ResourceManager.GetString("ConfigSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sites.
+        /// </summary>
+        internal static string ConfigSitesTag {
+            get {
+                return ResourceManager.GetString("ConfigSitesTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TimeDisplay.
+        /// </summary>
+        internal static string ConfigTimeDisplayTag {
+            get {
+                return ResourceManager.GetString("ConfigTimeDisplayTag", resourceCulture);
             }
         }
         

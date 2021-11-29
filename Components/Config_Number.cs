@@ -1,30 +1,36 @@
 ﻿using System;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
 
-namespace TV_Slideshow_Config_Editor
+namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class JSON_Number : TableLayoutPanel
+    public class ConfigNumber : TableLayoutPanel
     {
-        public JSON_Number(JProperty PropertyJSON)
+        readonly object parentObj;
+        readonly PropertyInfo property;
+
+        public ConfigNumber(string LabelText, PropertyInfo property, object obj)
         {
+            this.AutoSize = true;
+            this.property = property;
+            this.parentObj = obj;
+
             this.RowCount = 1;
             this.ColumnCount = 2;
-            this.AutoSize = true;
+            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
 
             var controlLabel = new Label()
             {
-                Text = Text = String_Manipulation.CamelCaseToNormal(PropertyJSON.Name),
+                Text = LabelText,
                 TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
             };
 
             var controlEdit = new MaskedTextBox()
             {
                 Dock = DockStyle.Fill,
-                Text = (string)PropertyJSON.Value,
-                Tag = PropertyJSON,
-                AsciiOnly = true
+                Text = property.GetValue(obj).ToString(),
+                AsciiOnly = true,
 
             };
             controlEdit.TextChanged += new EventHandler(Event_TextChanged);
@@ -43,7 +49,8 @@ namespace TV_Slideshow_Config_Editor
             c.Text = rgx.Replace(c.Text, "");
             c.SelectionStart = selectionStart - ((textLength > c.Text.Length) ? 1 : 0);
 
-            (c.Tag as JProperty).Value = int.Parse(c.Text);
+            int value = int.Parse(c.Text);
+            property.SetValue(parentObj, value, null);
         }
     }
 }

@@ -52,14 +52,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Config_Container.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Config_Notifications.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Config_TimeDisplay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Config_Sites.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Config_Defaults.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Configurations.cs" />
     <Compile Include="Logic\String_Manipulation.cs" />
-    <Compile Include="Components\String_JSON.cs">
+    <Compile Include="Components\Config_String.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Number_JSON.cs">
+    <Compile Include="Components\Config_Number.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Logic\JSON_Parser.cs" />
+    <Compile Include="Logic\Populate.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +103,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TV_Slideshow_Config_Editor.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\TV_Slideshow_Config_Editor.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
