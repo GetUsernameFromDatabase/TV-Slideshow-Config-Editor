@@ -23,13 +23,13 @@ namespace TV_Slideshow_Config_Editor
         private Control GenerateTabPageContent(string PageTag)
         {
             Control visualisedConfigSlice = new Label() { Text = "ERROR" };
-            if (PageTag == Properties.Resources.ConfigDefaultsTag)
+            if (Properties.Resources.ConfigDefaultsTag == PageTag)
                 visualisedConfigSlice = new ConfigVisualised.Defaults(Config.defaults);
-            else if (PageTag == Properties.Resources.ConfigTimeDisplayTag)
+            else if (Properties.Resources.ConfigTimeDisplayTag == PageTag)
                 visualisedConfigSlice = new ConfigVisualised.TimeDisplay(Config.showTime);
-            else if (PageTag == Properties.Resources.ConfigSitesTag)
+            else if (Properties.Resources.ConfigSitesTag == PageTag)
                 visualisedConfigSlice = new ConfigVisualised.Sites(Config.sites);
-            else if (PageTag == Properties.Resources.ConfigNotificationsTag)
+            else if (Properties.Resources.ConfigNotificationsTag == PageTag)
                 visualisedConfigSlice = new ConfigVisualised.Notifications(Config.notifications);
             return visualisedConfigSlice;
         }
@@ -37,37 +37,24 @@ namespace TV_Slideshow_Config_Editor
 
     struct ConfigParser
     {
-        public static IEnumerator<PropertyInfo> GetEnumerator(object obj)
-        {
-            foreach (var property in obj.GetType().GetProperties())
-            {
-                yield return property;
-            }
-        }
-
         public static List<Control> ConfigObjectIntoControls(object obj)
         {
             var controls = new List<Control>();
             if (obj == null) return null;
 
-            var objEnum = ConfigParser.GetEnumerator(obj);
-            while (objEnum.MoveNext())
+            foreach (var property in obj.GetType().GetProperties())
             {
-                var crnt = objEnum.Current;
-                var label = String_Manipulation.CamelCaseToNormal(crnt.Name);
-                var objType = objEnum.Current.PropertyType;
+                var objType = property.PropertyType;
 
                 Control control = new Label() { Text = "Error" };
-                if (objType == typeof(int))
-                    control = new ConfigNumber(label, crnt, obj);
-                else if (objType == typeof(string))
-                    control = new ConfigString(label, crnt, obj);
+                if (typeof(int) == objType)
+                    control = new ConfigNumber(property, obj);
+                else if (typeof(string) == objType)
+                    control = new ConfigString(property, obj);
                 controls.Add(control);
             }
             return controls;
         }
-
-
     }
 
 

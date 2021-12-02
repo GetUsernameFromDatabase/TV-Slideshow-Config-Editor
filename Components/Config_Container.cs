@@ -7,15 +7,6 @@ using System.Windows.Forms;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class TabPageContent : FlowLayoutPanel
-    {
-        public TabPageContent()
-        {
-            this.FlowDirection = FlowDirection.TopDown;
-            this.Dock = DockStyle.Fill;
-        }
-    }
-
     public class ConfigContainer : TableLayoutPanel
     {
         readonly FlowLayoutPanel SubOptions;
@@ -34,15 +25,10 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             {
                 Dock = DockStyle.Fill,
                 Text = TitleLabel,
-                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                TextAlign = ContentAlignment.MiddleCenter,
             };
-            this.SubOptions = new FlowLayoutPanel()
+            this.SubOptions = new FlowContainer()
             {
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Dock = DockStyle.Fill,
-
-                FlowDirection = FlowDirection.TopDown,
                 BorderStyle = BorderStyle.FixedSingle,
             };
             this.Controls.AddRange(new Control[2] { Title, SubOptions });
@@ -70,6 +56,10 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         public void AddControls(List<Control> controls)
         {
             this.SubOptions.Controls.AddRange(controls.ToArray());
+        }
+        public void AddControls(Control[] controls)
+        {
+            this.SubOptions.Controls.AddRange(controls);
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class Defaults : TabPageContent
+    public class Defaults : FlowContainer
     {
-        public Defaults(ConfigInterface.Defaults ConfigSlice)
+        public Defaults(ConfigInterface.Defaults ConfigSlice) : base("page")
         {
             var containerDurations = new ConfigContainer("Defaults");
             var durationsControls = ConfigParser.ConfigObjectIntoControls(ConfigSlice.durations);

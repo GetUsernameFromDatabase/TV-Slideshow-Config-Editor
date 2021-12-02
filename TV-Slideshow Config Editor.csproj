@@ -52,6 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Config_ComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Config_Property.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\FlowContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Config_Container.cs">
       <SubType>Component</SubType>
     </Compile>

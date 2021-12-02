@@ -4,7 +4,7 @@ using TV_Slideshow_Config_Editor.Logic;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class TimeDisplay : TabPageContent
+    public class TimeDisplay : FlowContainer
     {
         public TimeDisplay(ConfigInterface.TimeDisplay ConfigSlice)
         {

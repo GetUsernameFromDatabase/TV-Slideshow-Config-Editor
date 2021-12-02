@@ -11,13 +11,18 @@ namespace TV_Slideshow_Config_Editor
 {
     public partial class ConfigEditor : Form
     {
-        public JSchema Schema { get; private set; }
+        public JSchema Schema { get; private set; } = JSchema.Parse(Properties.Resources.ConfigSchema);
+        readonly private JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
         public Configurations Config { get; private set; }
         public string FilePath { get; private set; }
 
         private void SaveFile()
         {
-            var fileContent = JsonConvert.SerializeObject(this.Config, Formatting.Indented);
+            var fileContent = JsonConvert.SerializeObject(this.Config,
+                Formatting.Indented, SerializerSettings);
             using (StreamWriter file = new StreamWriter(this.FilePath))
                 file.Write(fileContent);
         }
@@ -34,11 +39,14 @@ namespace TV_Slideshow_Config_Editor
                     var fileContent = reader.ReadToEnd();
                     if (JObject.Parse(fileContent).IsValid(this.Schema))
                     {
-                        var JSON = JsonConvert.DeserializeObject<Configurations>(fileContent);
+                        var JSON = JsonConvert.DeserializeObject<Configurations>(
+                            fileContent, SerializerSettings
+                        );
                         this.Config = JSON;
                         PopulatePages();
                     }
-                    else MessageBox.Show("This is an improper TV Slideshow Configuration file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else MessageBox.Show("This is an improper TV Slideshow Configuration file",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -55,6 +63,7 @@ namespace TV_Slideshow_Config_Editor
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.FilePath = saveFileDialog1.FileName;
+                UpdateMenuButtonStatuses();
                 SaveFile();
             }
         }

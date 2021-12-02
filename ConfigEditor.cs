@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
 
 namespace TV_Slideshow_Config_Editor
@@ -9,8 +10,6 @@ namespace TV_Slideshow_Config_Editor
         public ConfigEditor()
         {
             InitializeComponent();
-            this.Schema = JSchema.Parse(Properties.Resources.ConfigSchema);
-
             TabPage_Defaults.Tag = Properties.Resources.ConfigDefaultsTag;
             TabPage_TimeDisplay.Tag = Properties.Resources.ConfigTimeDisplayTag;
             TabPage_Sites.Tag = Properties.Resources.ConfigSitesTag;
