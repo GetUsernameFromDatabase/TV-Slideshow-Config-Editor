@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Site_Height.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Config_ComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

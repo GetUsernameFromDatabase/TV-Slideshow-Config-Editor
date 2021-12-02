@@ -12,10 +12,10 @@ namespace TV_Slideshow_Config_Editor
     {
         public FlowContainer(string mode = "other")
         {
+            this.FlowDirection = FlowDirection.TopDown;
+            this.Dock = DockStyle.Fill;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.Dock = DockStyle.Fill;
-            this.FlowDirection = FlowDirection.TopDown;
 
             switch (mode)
             {
@@ -27,5 +27,11 @@ namespace TV_Slideshow_Config_Editor
                     break;
             }
         }
+
+        public void InsertControl(int index, Control control)
+        {
+            this.Controls.Add(control);
+            this.Controls.SetChildIndex(control, index);
+        } 
     }
 }

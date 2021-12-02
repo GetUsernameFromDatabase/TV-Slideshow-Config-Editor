@@ -31,7 +31,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         {
             var c = sender as MaskedTextBox;
             var value = c.Text;
-            property.SetValue(parentObj, value);
+            Property.SetValue(BoundObj, value);
         }
     }
 }

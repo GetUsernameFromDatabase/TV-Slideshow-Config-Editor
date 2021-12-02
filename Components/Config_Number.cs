@@ -40,8 +40,8 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             c.SelectionStart = selectionStart - ((textLength > c.Text.Length) ? 1 : 0);
 
             if (int.TryParse(c.Text, out int value))
-                property.SetValue(parentObj, value);
-            else property.SetValue(parentObj, null);
+                Property.SetValue(BoundObj, value);
+            else Property.SetValue(BoundObj, null);
 
         }
     }

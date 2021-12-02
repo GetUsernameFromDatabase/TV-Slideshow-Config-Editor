@@ -9,13 +9,12 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public class ConfigContainer : TableLayoutPanel
     {
-        readonly FlowLayoutPanel SubOptions;
+        readonly public FlowLayoutPanel SubOptions;
 
         public ConfigContainer(string TitleLabel)
         {
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.DoubleBuffered = true;
 
             this.ColumnCount = 1;
             this.RowCount = 2;
@@ -50,7 +49,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                     Text = "+>";
                     Tag = 1;
                 }
-                Stylize();
+
+                AutoSize = true;
+                AutoSizeMode = AutoSizeMode.GrowAndShrink;
             }
 
             public ControlButton(string DeleteButtonLabel)
@@ -58,13 +59,6 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 Text = DeleteButtonLabel;
                 Tag = 0;
                 Dock = DockStyle.Fill;
-                Stylize();
-            }
-
-            private void Stylize()
-            {
-                AutoSize = true;
-                AutoSizeMode = AutoSizeMode.GrowAndShrink;
             }
         }
 

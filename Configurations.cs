@@ -1,4 +1,6 @@
-﻿namespace TV_Slideshow_Config_Editor.ConfigInterface
+﻿using System.Collections.Generic;
+
+namespace TV_Slideshow_Config_Editor.ConfigInterface
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles",
         Justification = "JSON Object")]
@@ -6,7 +8,7 @@
     {
         public Defaults defaults { get; set; }
         public TimeDisplay showTime { get; set; }
-        public Site[] sites { get; set; }
+        public List<Site> sites { get; set; }
         public Notification[] notifications { get; set; }
     }
 

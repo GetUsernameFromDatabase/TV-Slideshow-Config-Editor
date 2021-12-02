@@ -1,22 +1,108 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class Sites : FlowContainer
+    public partial class Sites : FlowContainer
     {
-        public Sites(Site[] ConfigSlice) : base("page")
+        public List<Site> CurrentSites { get; protected set; }
+        public Sites(List<Site> ConfigSlice) : base("page")
         {
-            for (int i = 0; i < ConfigSlice.Length; i++)
+            this.CurrentSites = ConfigSlice;
+            for (int i = 0; i < ConfigSlice.Count; i++)
             {
                 var slice = ConfigSlice[i];
+                // TODO: make it take into account adding/removing sites
                 var title = string.Format("{0}. Site", i + 1);
                 var control = SiteIntoControls(title, slice);
                 this.Controls.Add(control);
             }
+        }
+
+        public Site MakeSite()
+        {
+            var site = new Site()
+            {
+                duration = 0,
+                height = "100%",
+                url = "./",
+            };
+            return site;
+        }
+
+        private void BindSite(Site site, Control control, int index = -1)
+        {
+            if (index != -1)
+            {
+                this.CurrentSites.Insert(index, site);
+                this.InsertControl(index, control);
+            }
+            else
+            {
+                this.CurrentSites.Add(site);
+                this.Controls.Add(control);
+            }
+        }
+
+        private void SiteButtonClick(object sender, EventArgs e)
+        {
+            var c = sender as Button;
+
+            if (0 == c.Tag as int?)
+            {
+                var btnContainer = c.Parent as ConfigContainer;
+                btnContainer.Parent.Controls.Remove(btnContainer);
+            }
+            else
+            {
+                var btnContainer = c.Parent.Parent as ConfigContainer;
+                var index = this.Controls.IndexOf(btnContainer);
+
+                var newSite = MakeSite();
+                var siteControls = SiteIntoControls("NAAA", newSite);
+
+                var btnType = (c.Tag as int?) == 1 ? 1 : 0;
+                BindSite(newSite, siteControls, index + btnType);
+            }
+        }
+
+        private void SiteContainerRemoved(object sender, ControlEventArgs e)
+        {
+            if (!(e.Control is ConfigContainer removedControl)) return;
+            var controlWithBoundSite = removedControl.SubOptions.Controls[0] as ConfigString;
+
+            var site = controlWithBoundSite.BoundObj as Site;
+            CurrentSites.Remove(site);
+            Console.WriteLine(this.Controls.Count);
+            if (this.Controls.Count == 0)
+            {
+                var addButton = new Button()
+                {
+                    Text = "+",
+                    Font = new Font(Font.FontFamily, 18),
+                    Dock = DockStyle.Fill,
+                    AutoSize = true,
+                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                };
+                addButton.Click += NoSitesButton_Click;
+                this.Controls.Add(addButton);
+            }
+        }
+
+        private void NoSitesButton_Click(object sender, EventArgs e)
+        {
+            var c = sender as Button;
+            var newSite = MakeSite();
+            var siteControls = SiteIntoControls("NAAA", newSite);
+
+            BindSite(newSite, siteControls);
+            c.Parent.Controls.Remove(c);
         }
 
         private ConfigContainer SiteIntoControls(string Title, Site site)
@@ -33,78 +119,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 subControls[2].Controls[1].Text = "";
             container.AddControls(subControls);
 
-            void btnClick(object sender, EventArgs e)
-            {
-                var c = sender as Control;
-                Console.WriteLine(c.Tag);
-            }
-            container.MakeThisDeletable(btnClick);
+            container.MakeThisDeletable(SiteButtonClick);
+            this.ControlRemoved += SiteContainerRemoved;
             return container;
-        }
-
-        public class SiteHeight : Config_ComplexProperty
-        {
-            public SiteHeight(Site site, PropertyInfo property = null) :
-                base(site, new string[2] { "Simple", "Complex" }, property)
-            {
-                this.parentObj = site;
-                this.property = property ?? site.GetType().GetProperty("height");
-                if (this.property.GetValue(parentObj) == null)
-                    this.property.SetValue(parentObj, "100%");
-                var propType = property.GetValue(parentObj).GetType();
-
-                // Making editors modifies the property value
-                var SimpleHeight = MakeSimpleHeightEditor();
-                var ComplexHeight = MakeComplexHeightEditor();
-                AvailableEditors = new Control[2] { SimpleHeight, ComplexHeight };
-
-                // Hides unecessary editor and changes property value back
-                ChangeActiveEditor(typeof(string) == propType ? 0 : 1);
-                var heightChooser = ModeChooser.Choices;
-                heightChooser.VisibleChanged += SetDefault_SelectedIndex;
-
-                this.Controls.Add(ModeChooser);
-                this.Controls.AddRange(AvailableEditors);
-            }
-
-            private Control MakeSimpleHeightEditor()
-            {
-                var originalValue = property.GetValue(parentObj); // Not needed on the last Editor
-                if (property.GetValue(parentObj).GetType() != typeof(string))
-                    property.SetValue(parentObj, "100%");
-
-                var control = new ConfigString("Height", property, parentObj)
-                {
-                    Tag = property.GetValue(parentObj),
-                };
-
-                this.property.SetValue(parentObj, originalValue);
-                return control;
-            }
-            private Control MakeComplexHeightEditor()
-            {
-                var propVal = property.GetValue(parentObj);
-                var Height = typeof(string) == propVal.GetType() ? new ComplexHeight() :
-                    JsonConvert.DeserializeObject<ComplexHeight>(propVal.ToString());
-
-                property.SetValue(parentObj, Height);
-                var container = new FlowContainer()
-                {
-                    Tag = property.GetValue(parentObj),
-                };
-
-                var controls = ConfigParser.ConfigObjectIntoControls(container.Tag);
-                container.Controls.AddRange(controls.ToArray());
-                return container;
-            }
-
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Style",
-                "IDE1006:Naming Styles", Justification = "JSON Object")]
-            private class ComplexHeight
-            {
-                public string singleColumn { get; set; } = "100%";
-                public string multiColumn { get; set; } = "100%";
-            }
         }
     }
 }

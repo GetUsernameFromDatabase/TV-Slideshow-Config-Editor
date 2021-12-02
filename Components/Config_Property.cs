@@ -10,8 +10,8 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public class Config_SimpleProperty : TableLayoutPanel
     {
-        public object parentObj { get; protected set; }
-        public PropertyInfo property { get; protected set; }
+        public object BoundObj { get; protected set; }
+        public PropertyInfo Property { get; protected set; }
 
         public Config_SimpleProperty()
         {
@@ -20,8 +20,8 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
         public Config_SimpleProperty(PropertyInfo property, object obj)
         {
-            this.property = property;
-            this.parentObj = obj;
+            this.Property = property;
+            this.BoundObj = obj;
             StyleMe();
         }
 
@@ -52,8 +52,8 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             {
                 Dock = DockStyle.Fill,
             };
-            if (this.property != null)
-                editBox.Text = this.property.GetValue(this.parentObj).ToString();
+            if (this.Property != null)
+                editBox.Text = this.Property.GetValue(this.BoundObj).ToString();
             return editBox;
         }
     }
@@ -103,7 +103,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         protected void ChangeActiveEditor(int index)
         {
             ActiveEditor = AvailableEditors[index];
-            property.SetValue(parentObj, this.ActiveEditor.Tag);
+            Property.SetValue(BoundObj, this.ActiveEditor.Tag);
             HideOtherEditors();
         }
 
