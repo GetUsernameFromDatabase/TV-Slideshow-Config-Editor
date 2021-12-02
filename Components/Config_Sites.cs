@@ -32,6 +32,13 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             if (subControls[2].Controls[1].Text == "0")
                 subControls[2].Controls[1].Text = "";
             container.AddControls(subControls);
+
+            void btnClick(object sender, EventArgs e)
+            {
+                var c = sender as Control;
+                Console.WriteLine(c.Tag);
+            }
+            container.MakeThisDeletable(btnClick);
             return container;
         }
 
