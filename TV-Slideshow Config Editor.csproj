@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Notifications_Schedule.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Site_Height.cs">
       <SubType>Component</SubType>
     </Compile>

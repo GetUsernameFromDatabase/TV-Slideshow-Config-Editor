@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -9,6 +10,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
     public class ConfigContainer : TableLayoutPanel
     {
         readonly public FlowLayoutPanel SubOptions;
+        private object BoundObject;
 
         public ConfigContainer(string TitleLabel)
         {
@@ -109,6 +111,22 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
                 e.Graphics.DrawRectangle(pen, rectangle);
             }
+        }
+
+        public object GetBoundConfigObject()
+        {
+            if (BoundObject != null) return BoundObject;
+            foreach (var item in SubOptions.Controls)
+            {
+                if (item is ConfigString strCfgControl)
+                    BoundObject = strCfgControl.BoundObj;
+                else if (item is ConfigNumber intCfgControl)
+                    BoundObject = intCfgControl.BoundObj;
+                else continue;
+                // If correct control was found continue is not triggered
+                return BoundObject;
+            }
+            return null;
         }
 
         public void AddControls(List<Control> controls)

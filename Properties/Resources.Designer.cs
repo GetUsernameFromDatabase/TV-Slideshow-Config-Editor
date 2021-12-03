@@ -80,27 +80,27 @@ namespace TV_Slideshow_Config_Editor.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///  &apos;description&apos;: &apos;TV Slideshow Config&apos;,
-        ///  &apos;type&apos;: &apos;object&apos;,
-        ///  &apos;properties&apos;: {
-        ///    &apos;defaults&apos;: {
-        ///      &apos;type&apos;: &apos;object&apos;,
-        ///      &apos;properties&apos;: {
-        ///        &apos;durations&apos;: {
-        ///          &apos;type&apos;: &apos;object&apos;,
-        ///          &apos;properties&apos;: {
-        ///            &apos;site&apos;: {
-        ///              &apos;type&apos;: &apos;integer&apos;
+        ///  &quot;description&quot;: &quot;TV Slideshow Config&quot;,
+        ///  &quot;type&quot;: &quot;object&quot;,
+        ///  &quot;properties&quot;: {
+        ///    &quot;defaults&quot;: {
+        ///      &quot;type&quot;: &quot;object&quot;,
+        ///      &quot;properties&quot;: {
+        ///        &quot;durations&quot;: {
+        ///          &quot;type&quot;: &quot;object&quot;,
+        ///          &quot;properties&quot;: {
+        ///            &quot;site&quot;: {
+        ///              &quot;type&quot;: &quot;integer&quot;
         ///            },
-        ///            &apos;slide&apos;: {
-        ///              &apos;type&apos;: &apos;integer&apos;
+        ///            &quot;slide&quot;: {
+        ///              &quot;type&quot;: &quot;integer&quot;
         ///            },
-        ///            &apos;notification&apos;: {
-        ///              &apos;type&apos;: &apos;integer&apos;
+        ///            &quot;notification&quot;: {
+        ///              &quot;type&quot;: &quot;integer&quot;
         ///            }
         ///          },
-        ///          &apos;required&apos;: [
-        ///            &apos;site&apos; [rest of string was truncated]&quot;;.
+        ///          &quot;required&quot;: [
+        ///            &quot;site&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ConfigSchema {
             get {

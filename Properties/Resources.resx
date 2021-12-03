@@ -125,135 +125,134 @@
   </data>
   <data name="ConfigSchema" xml:space="preserve">
     <value>{
-  'description': 'TV Slideshow Config',
-  'type': 'object',
-  'properties': {
-    'defaults': {
-      'type': 'object',
-      'properties': {
-        'durations': {
-          'type': 'object',
-          'properties': {
-            'site': {
-              'type': 'integer'
+  "description": "TV Slideshow Config",
+  "type": "object",
+  "properties": {
+    "defaults": {
+      "type": "object",
+      "properties": {
+        "durations": {
+          "type": "object",
+          "properties": {
+            "site": {
+              "type": "integer"
             },
-            'slide': {
-              'type': 'integer'
+            "slide": {
+              "type": "integer"
             },
-            'notification': {
-              'type': 'integer'
+            "notification": {
+              "type": "integer"
             }
           },
-          'required': [
-            'site',
-            'slide',
-            'notification'
+          "required": [
+            "site",
+            "slide",
+            "notification"
           ]
         }
       },
-      'required': [
-        'durations'
+      "required": [
+        "durations"
       ]
     },
-    'showTime': {
-      'type': 'object',
-      'properties': {
-        'duration': {
-          'type': 'integer'
+    "showTime": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "integer"
         },
-        'interval': {
-          'type': 'integer'
+        "interval": {
+          "type": "integer"
         }
       },
-      'required': [
-        'duration',
-        'interval'
+      "required": [
+        "duration",
+        "interval"
       ]
     },
-    'sites': {
-      'type': 'array',
-      'items': {
-        'type': 'object',
-        'properties': {
-          'url': {
-            'type': 'string'
+    "sites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
           },
-          'height': {
-            'type': [
-              'object',
-              'string'
+          "height": {
+            "type": [
+              "object",
+              "string"
             ],
-            'properties': {
-              'singleColumn': {
-                'type': 'string'
+            "properties": {
+              "singleColumn": {
+                "type": "string"
               },
-              'multiColumn': {
-                'type': 'string'
+              "multiColumn": {
+                "type": "string"
               }
             },
-            'required': [
-              'singleColumn'
+            "required": [
+              "singleColumn"
             ]
           },
-          'duration': {
-            'type': 'integer'
+          "duration": {
+            "type": "integer"
           }
         },
-        'required': [
-          'url'
+        "required": [
+          "url"
         ]
       }
     },
-    'notifications': {
-      'type': 'array',
-      'items': {
-        'type': 'object',
-        'properties': {
-          'schedule': {
-            'type': [
-              'object',
-              'array',
-              'string'
+    "notifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "schedule": {
+            "type": [
+              "object",
+              "array",
+              "string"
             ],
-            'items': {
-              'type': 'string'
+            "items": {
+              "type": "string"
             },
-            'properties': {
-              'times': {
-                'type': 'array',
-                'items': {
-                  'type': 'string'
+            "properties": {
+              "times": {
+                "type": "array",
+                "items": {
+                  "type": "string"
                 }
               },
-              'weekDays': {
-                'type': 'string'
+              "weekDays": {
+                "type": "string"
               }
             },
-            'required': [
-              'times'
+            "required": [
+              "times"
             ]
           },
-          'audioFile': {
-            'type': 'string'
+          "audioFile": {
+            "type": "string"
           },
-          'message': {
-            'type': 'string'
+          "message": {
+            "type": "string"
           },
-          'duration': {
-            'type': 'integer'
+          "duration": {
+            "type": "integer"
           }
         },
-        'required': [
-          'schedule'
+        "required": [
+          "schedule"
         ]
       }
     }
   },
-  'required': [
-    'defaults',
-    'showTime',
-    'sites',
-    'notifications'
+  "required": [
+    "defaults",
+    "showTime",
+    "sites"
   ]
 }</value>
   </data>

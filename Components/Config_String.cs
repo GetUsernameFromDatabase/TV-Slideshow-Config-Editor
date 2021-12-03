@@ -30,6 +30,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         protected void Event_TextChanged(object sender, EventArgs e)
         {
             var c = sender as MaskedTextBox;
+            c.Text = c.Text.Trim();
             var value = c.Text;
             Property.SetValue(BoundObj, value);
         }

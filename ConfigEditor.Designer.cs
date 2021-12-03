@@ -59,7 +59,7 @@ namespace TV_Slideshow_Config_Editor
             this.TabControl_MainConfig.Location = new System.Drawing.Point(0, 24);
             this.TabControl_MainConfig.Name = "TabControl_MainConfig";
             this.TabControl_MainConfig.SelectedIndex = 0;
-            this.TabControl_MainConfig.Size = new System.Drawing.Size(800, 426);
+            this.TabControl_MainConfig.Size = new System.Drawing.Size(922, 485);
             this.TabControl_MainConfig.TabIndex = 0;
             this.TabControl_MainConfig.Tag = "";
             // 
@@ -67,7 +67,7 @@ namespace TV_Slideshow_Config_Editor
             // 
             this.TabPage_Defaults.Location = new System.Drawing.Point(4, 22);
             this.TabPage_Defaults.Name = "TabPage_Defaults";
-            this.TabPage_Defaults.Size = new System.Drawing.Size(792, 400);
+            this.TabPage_Defaults.Size = new System.Drawing.Size(914, 459);
             this.TabPage_Defaults.TabIndex = 0;
             this.TabPage_Defaults.Tag = "defaults";
             this.TabPage_Defaults.Text = "Defaults";
@@ -109,7 +109,7 @@ namespace TV_Slideshow_Config_Editor
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(922, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -177,7 +177,7 @@ namespace TV_Slideshow_Config_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(922, 509);
             this.Controls.Add(this.TabControl_MainConfig);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
