@@ -77,7 +77,7 @@ namespace TV_Slideshow_Config_Editor
             // 
             this.TabPage_TimeDisplay.Location = new System.Drawing.Point(4, 22);
             this.TabPage_TimeDisplay.Name = "TabPage_TimeDisplay";
-            this.TabPage_TimeDisplay.Size = new System.Drawing.Size(792, 400);
+            this.TabPage_TimeDisplay.Size = new System.Drawing.Size(914, 459);
             this.TabPage_TimeDisplay.TabIndex = 1;
             this.TabPage_TimeDisplay.Tag = "timedisplay";
             this.TabPage_TimeDisplay.Text = "Show Time";
@@ -87,7 +87,7 @@ namespace TV_Slideshow_Config_Editor
             // 
             this.TabPage_Sites.Location = new System.Drawing.Point(4, 22);
             this.TabPage_Sites.Name = "TabPage_Sites";
-            this.TabPage_Sites.Size = new System.Drawing.Size(792, 400);
+            this.TabPage_Sites.Size = new System.Drawing.Size(914, 459);
             this.TabPage_Sites.TabIndex = 2;
             this.TabPage_Sites.Tag = "sites";
             this.TabPage_Sites.Text = "Sites";
@@ -97,7 +97,7 @@ namespace TV_Slideshow_Config_Editor
             // 
             this.TabPage_Notifications.Location = new System.Drawing.Point(4, 22);
             this.TabPage_Notifications.Name = "TabPage_Notifications";
-            this.TabPage_Notifications.Size = new System.Drawing.Size(792, 400);
+            this.TabPage_Notifications.Size = new System.Drawing.Size(914, 459);
             this.TabPage_Notifications.TabIndex = 3;
             this.TabPage_Notifications.Tag = "notifications";
             this.TabPage_Notifications.Text = "Notifications";

@@ -71,7 +71,7 @@ namespace TV_Slideshow_Config_Editor
             var btn = new Button()
             {
                 Text = "+",
-                Font = new Font(Font.FontFamily, 18),
+                Font = new Font(Font.FontFamily, 24),
                 Dock = DockStyle.Top,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,

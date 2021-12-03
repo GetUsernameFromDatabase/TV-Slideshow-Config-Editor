@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigVisualised;
 
@@ -12,6 +13,9 @@ namespace TV_Slideshow_Config_Editor
             foreach (var control in TabControl_MainConfig.TabPages)
             {
                 var page = control as TabPage;
+                page.Controls.Clear();
+                GC.Collect();
+
                 var tag = page.Tag as string;
                 page.Controls.Add(GenerateTabPageContent(tag));
             }
