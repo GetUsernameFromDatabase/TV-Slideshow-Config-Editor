@@ -52,42 +52,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Notifications_Schedule.cs">
+    <Compile Include="Components\Config\Notifications\Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Site_Height.cs">
+    <Compile Include="Components\Config\Sites\Height.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_ComboBox.cs">
+    <Compile Include="Components\Config\ComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_Property.cs">
+    <Compile Include="Components\Config\Property.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\FlowContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_Container.cs">
+    <Compile Include="Components\Config\Container.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_Notifications.cs">
+    <Compile Include="Components\Config\Notifications\Notifications_Main.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_TimeDisplay.cs">
+    <Compile Include="Components\Config\TimeDisplay\TimeDisplay.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_Sites.cs">
+    <Compile Include="Components\Config\Sites\Sites_Main.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_Defaults.cs">
+    <Compile Include="Components\Config\Defaults\Defaults.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Configurations.cs" />
     <Compile Include="Logic\String_Manipulation.cs" />
-    <Compile Include="Components\Config_String.cs">
+    <Compile Include="Components\Config\String.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config_Number.cs">
+    <Compile Include="Components\Config\Number.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Logic\Populate.cs">
