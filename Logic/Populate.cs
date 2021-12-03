@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigVisualised;
-using TV_Slideshow_Config_Editor.Logic;
 
 namespace TV_Slideshow_Config_Editor
 {

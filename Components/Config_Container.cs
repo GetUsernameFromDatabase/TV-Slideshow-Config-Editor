@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
@@ -87,6 +86,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             var buttonDelete = new ControlButton("DELETE");
             buttonDelete.Click += new EventHandler(buttonClickCallback);
 
+            // this.Controls.Remove(Label);
             this.Controls.Add(Header, 0, 0);
             this.Controls.Add(buttonDelete);
             RowCount += 1;

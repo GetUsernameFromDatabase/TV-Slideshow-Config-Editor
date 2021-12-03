@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
+using TV_Slideshow_Config_Editor.Logic;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
@@ -18,8 +17,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             for (int i = 0; i < ConfigSlice.Count; i++)
             {
                 var slice = ConfigSlice[i];
-                // TODO: make it take into account adding/removing sites
-                var title = string.Format("{0}. Site", i + 1);
+                var title = String_Manipulation.MakeControlTitle(i, "Site");
                 var control = SiteIntoControls(title, slice);
                 this.Controls.Add(control);
             }
@@ -36,52 +34,42 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             return site;
         }
 
-        private void BindSite(Site site, Control control, int index = -1)
-        {
-            if (index != -1)
-            {
-                this.CurrentSites.Insert(index, site);
-                this.InsertControl(index, control);
-            }
-            else
-            {
-                this.CurrentSites.Add(site);
-                this.Controls.Add(control);
-            }
-        }
-
         private void SiteButtonClick(object sender, EventArgs e)
         {
-            var c = sender as Button;
+            var Control = sender as Button;
 
-            if (0 == c.Tag as int?)
-            {
-                var btnContainer = c.Parent as ConfigContainer;
-                btnContainer.Parent.Controls.Remove(btnContainer);
-            }
+            if (0 == Control.Tag as int?) RemoveParent(Control);
             else
             {
-                var btnContainer = c.Parent.Parent as ConfigContainer;
-                var index = this.Controls.IndexOf(btnContainer);
+                var btnContainer = Control.Parent.Parent as ConfigContainer;
+                var btnType = (Control.Tag as int?) == 1 ? 1 : 0;
+                var callerIndex = GetConfigContainerIndex(btnContainer);
 
+                var controlIndex = callerIndex + btnType;
                 var newSite = MakeSite();
-                var siteControls = SiteIntoControls("NAAA", newSite);
+                var title = String_Manipulation.MakeControlTitle(controlIndex, "Site");
 
-                var btnType = (c.Tag as int?) == 1 ? 1 : 0;
-                BindSite(newSite, siteControls, index + btnType);
+                var siteControls = SiteIntoControls(title, newSite);
+                BindConfigControl(siteControls, newSite, CurrentSites, controlIndex);
+                UpdateOtherTitles(controlIndex);
             }
         }
 
         private void SiteContainerRemoved(object sender, ControlEventArgs e)
         {
-            if (!(e.Control is ConfigContainer removedControl)) return;
-            var controlWithBoundSite = removedControl.SubOptions.Controls[0] as ConfigString;
+            if (!(e.Control is ConfigContainer removedControl))
+            {
+                e.Control.Dispose();
+                return;
+            };
+            var cfgCntSubOptions = removedControl.SubOptions.Controls;
+            if (!(cfgCntSubOptions[0] is ConfigString controlWithBoundSite)) return;
 
             var site = controlWithBoundSite.BoundObj as Site;
             CurrentSites.Remove(site);
-            Console.WriteLine(this.Controls.Count);
+
             if (this.Controls.Count == 0)
-            {
+            { // So that user can add a new site
                 var addButton = new Button()
                 {
                     Text = "+",
@@ -93,15 +81,19 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 addButton.Click += NoSitesButton_Click;
                 this.Controls.Add(addButton);
             }
+            else UpdateOtherTitles(GetConfigContainerIndex(removedControl));
+            controlWithBoundSite.Dispose();
         }
 
         private void NoSitesButton_Click(object sender, EventArgs e)
         {
             var c = sender as Button;
             var newSite = MakeSite();
-            var siteControls = SiteIntoControls("NAAA", newSite);
 
-            BindSite(newSite, siteControls);
+            var title = String_Manipulation.MakeControlTitle(0, "Site");
+            var siteControls = SiteIntoControls(title, newSite);
+
+            BindConfigControl(siteControls, newSite, CurrentSites);
             c.Parent.Controls.Remove(c);
         }
 

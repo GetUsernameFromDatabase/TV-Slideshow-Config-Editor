@@ -9,7 +9,7 @@ namespace TV_Slideshow_Config_Editor.ConfigInterface
         public Defaults defaults { get; set; }
         public TimeDisplay showTime { get; set; }
         public List<Site> sites { get; set; }
-        public Notification[] notifications { get; set; }
+        public List<Notification> notifications { get; set; }
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles",
