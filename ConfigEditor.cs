@@ -34,5 +34,16 @@ namespace TV_Slideshow_Config_Editor
             ResumeLayout();
             base.OnResizeEnd(e);
         }
+        protected override CreateParams CreateParams
+        { 
+            // Makes all controls on creation DoubleBuffered
+            // https://stackoverflow.com/a/25648710
+            get
+            {
+                CreateParams handleParam = base.CreateParams;
+                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
+                return handleParam;
+            }
+        }
     }
 }
