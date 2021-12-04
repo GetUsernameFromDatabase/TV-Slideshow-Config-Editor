@@ -52,21 +52,14 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         {
             var Control = sender as Button;
 
-            if (0 == Control.Tag as int?) RemoveParent(Control);
-            else
-            {
-                var btnContainer = Control.Parent.Parent as ConfigContainer;
-                var btnType = (Control.Tag as int?) == 1 ? 1 : 0;
-                var callerIndex = GetConfigContainerIndex(btnContainer);
+            if (0 == Control.Tag as int?) { RemoveParent(Control); return; }
+            var controlIndex = GetNewConfigContainerIndex(Control);
+            var newControl = MakeDefault();
+            var title = String_Manipulation.MakeControlTitle(controlIndex, "Site");
 
-                var controlIndex = callerIndex + btnType;
-                var newSite = MakeDefault();
-                var title = String_Manipulation.MakeControlTitle(controlIndex, "Site");
-
-                var siteControls = SiteIntoControls(title, newSite);
-                BindConfigControl(siteControls, newSite, CurrentSites, controlIndex);
-                UpdateOtherTitles(controlIndex);
-            }
+            var siteControls = SiteIntoControls(title, newControl);
+            BindConfigControl(siteControls, newControl, CurrentSites, controlIndex);
+            UpdateOtherTitles(controlIndex);
         }
 
         private void SiteRemoved(object sender, ControlEventArgs e)

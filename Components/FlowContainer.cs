@@ -66,6 +66,14 @@ namespace TV_Slideshow_Config_Editor
             };
         }
 
+        protected int GetNewConfigContainerIndex(Button AddControlButton)
+        {
+            var btnContainer = AddControlButton.Parent.Parent as ConfigContainer;
+            var btnType = (AddControlButton.Tag as int?) == 1 ? 1 : 0;
+            var callerIndex = GetConfigContainerIndex(btnContainer);
+            return callerIndex + btnType;
+        }
+
         protected Button MakeNoOtherControlButton(Action<object, EventArgs> buttonClickCallback)
         {
             var btn = new Button()

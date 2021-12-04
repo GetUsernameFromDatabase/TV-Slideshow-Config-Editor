@@ -51,21 +51,14 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         {
             var Control = sender as Button;
 
-            if (0 == Control.Tag as int?) RemoveParent(Control);
-            else
-            {
-                var btnContainer = Control.Parent.Parent as ConfigContainer;
-                var btnType = (Control.Tag as int?) == 1 ? 1 : 0;
-                var callerIndex = GetConfigContainerIndex(btnContainer);
+            if (0 == Control.Tag as int?) { RemoveParent(Control); return; }
+            var controlIndex = GetNewConfigContainerIndex(Control);
+            var newControl = MakeDefault();
+            var title = String_Manipulation.MakeControlTitle(controlIndex, "Notification");
 
-                var controlIndex = callerIndex + btnType;
-                var newSite = MakeDefault();
-                var title = String_Manipulation.MakeControlTitle(controlIndex, "Notification");
-
-                var siteControls = NotificationIntoControls(title, newSite);
-                BindConfigControl(siteControls, newSite, CurrentNotifications, controlIndex);
-                UpdateOtherTitles(controlIndex);
-            }
+            var siteControls = NotificationIntoControls(title, newControl);
+            BindConfigControl(siteControls, newControl, CurrentNotifications, controlIndex);
+            UpdateOtherTitles(controlIndex);
         }
 
         private void NotificationRemoved(object sender, ControlEventArgs e)
@@ -89,6 +82,5 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             BindConfigControl(siteControls, newSite, CurrentNotifications);
             ShowEmptyPageControlButton_IfNeeded();
         }
-
     }
 }
