@@ -46,12 +46,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
             subControls[0] = new ConfigString("URL", properties[0], site);
             subControls[1] = new SiteHeight(site, properties[1]);
-            subControls[2] = new ConfigNumber("Duration", properties[2], site);
+            subControls[2] = new ConfigNumber("Duration", properties[2], site, true);
 
-            if (subControls[2].Controls[1].Text == "0")
-                subControls[2].Controls[1].Text = "";
             container.AddControls(subControls);
-
             container.MakeThisDeletable(SiteButton_Click);
             return container;
         }

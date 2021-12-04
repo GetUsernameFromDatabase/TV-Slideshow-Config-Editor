@@ -48,12 +48,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             subControls[0] = new Label() { Text = "IN_PROGRESS" };
             subControls[1] = new ConfigString("Audio File", properties[1], notification);
             subControls[2] = new ConfigString("Message", properties[2], notification);
-            subControls[3] = new ConfigNumber("Duration", properties[3], notification);
+            subControls[3] = new ConfigNumber("Duration", properties[3], notification, true);
 
-            if (subControls[3].Controls[1].Text == "0")
-                subControls[3].Controls[1].Text = "";
             container.AddControls(subControls);
-
             container.MakeThisDeletable(NotificationButton_Click);
             return container;
         }
