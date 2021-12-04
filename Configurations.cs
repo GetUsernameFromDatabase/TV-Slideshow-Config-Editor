@@ -40,8 +40,8 @@ namespace TV_Slideshow_Config_Editor.ConfigInterface
         Justification = "JSON Object")]
     public class Site
     {
-        public string url { get; set; }
-        public object height { get; set; }
+        public string url { get; set; } = "./";
+        public object height { get; set; } = "100%";
         public int? duration { get; set; } = 0;
     }
 
@@ -49,9 +49,17 @@ namespace TV_Slideshow_Config_Editor.ConfigInterface
         Justification = "JSON Object")]
     public class Notification
     {
-        public object schedule { get; set; }
-        public string audioFile { get; set; }
-        public string message { get; set; }
+        public Schedule schedule { get; set; } = new Schedule();
+        public string audioFile { get; set; } = "";
+        public string message { get; set; } = "";
         public int? duration { get; set; } = 0;
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles",
+        Justification = "JSON Object")]
+    public class Schedule
+    {
+        public List<string> time { get; set; } = new List<string>() { "12:00" };
+        public string weekDays { get; set; } = "";
     }
 }

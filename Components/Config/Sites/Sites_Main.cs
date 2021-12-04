@@ -28,14 +28,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             ShowEmptyPageControlButton_IfNeeded();
         }
 
-        public Site MakeSite()
+        public Site MakeDefault()
         {
-            var site = new Site()
-            {
-                height = "100%",
-                url = "./",
-                duration = 0,
-            };
+            var site = new Site();
             return site;
         }
         private ConfigContainer SiteIntoControls(string Title, Site site)
@@ -65,7 +60,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 var callerIndex = GetConfigContainerIndex(btnContainer);
 
                 var controlIndex = callerIndex + btnType;
-                var newSite = MakeSite();
+                var newSite = MakeDefault();
                 var title = String_Manipulation.MakeControlTitle(controlIndex, "Site");
 
                 var siteControls = SiteIntoControls(title, newSite);
@@ -89,7 +84,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
         private void NoSitesButton_Click(object sender, EventArgs e)
         {
-            var newSite = MakeSite();
+            var newSite = MakeDefault();
             var title = String_Manipulation.MakeControlTitle(0, "Site");
             var siteControls = SiteIntoControls(title, newSite);
             BindConfigControl(siteControls, newSite, CurrentSites);

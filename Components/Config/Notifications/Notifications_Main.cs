@@ -18,8 +18,6 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             for (int i = 0; i < ConfigSlice.Count; i++)
             {
                 var slice = ConfigSlice[i];
-                slice.audioFile = slice.audioFile ?? "";
-                slice.message = slice.message ?? "";
                 var title = String_Manipulation.MakeControlTitle(i, "Notification");
                 var control = NotificationIntoControls(title, slice);
                 this.Controls.Add(control);
@@ -28,15 +26,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             ShowEmptyPageControlButton_IfNeeded();
         }
 
-        public Notification MakeNotification()
+        public Notification MakeDefault()
         {
-            var notification = new Notification()
-            {
-                schedule = "12:00",
-                audioFile = "",
-                message = "",
-                duration = 0,
-            };
+            var notification = new Notification();
             return notification;
         }
         private ConfigContainer NotificationIntoControls(string Title, Notification notification)
@@ -67,7 +59,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 var callerIndex = GetConfigContainerIndex(btnContainer);
 
                 var controlIndex = callerIndex + btnType;
-                var newSite = MakeNotification();
+                var newSite = MakeDefault();
                 var title = String_Manipulation.MakeControlTitle(controlIndex, "Notification");
 
                 var siteControls = NotificationIntoControls(title, newSite);
@@ -91,7 +83,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
         private void NoOtherControls_Click(object sender, EventArgs e)
         {
-            var newSite = MakeNotification();
+            var newSite = MakeDefault();
             var title = String_Manipulation.MakeControlTitle(0, "Notification");
             var siteControls = NotificationIntoControls(title, newSite);
             BindConfigControl(siteControls, newSite, CurrentNotifications);

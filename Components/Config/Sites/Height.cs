@@ -13,13 +13,11 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
     {
         public class SiteHeight : Config_ComplexProperty
         {
-            public SiteHeight(Site site, PropertyInfo property = null) :
+            public SiteHeight(Site site, PropertyInfo property) :
                 base(site, new string[2] { "Simple", "Complex" }, property)
             {
                 this.BoundObj = site;
-                this.Property = property ?? site.GetType().GetProperty("height");
-                if (this.Property.GetValue(BoundObj) == null)
-                    this.Property.SetValue(BoundObj, "100%");
+                this.Property = property;
                 var propType = property.GetValue(BoundObj).GetType();
 
                 // Making editors modifies the property value
