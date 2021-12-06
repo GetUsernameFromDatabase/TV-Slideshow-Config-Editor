@@ -6,17 +6,16 @@ using TV_Slideshow_Config_Editor.Logic;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class ConfigNumber : Config_SimpleProperty
+    public class ConfigNumber : Config_BaseProperty
     {
         public ConfigNumber(string label, PropertyInfo property, object obj,
             bool nullTheZero = false) : base(property, obj)
         {
             this.Construct(label);
-            if (nullTheZero)
-            {
-                var TextEditor = this.Controls[1];
-                if (TextEditor.Text == "0") TextEditor.Text = "";
-            }
+
+            if (!nullTheZero) return;
+            var TextEditor = this.Controls[1];
+            if (TextEditor.Text == "0") TextEditor.Text = "";
         }
         public ConfigNumber(PropertyInfo property, object obj) : base(property, obj)
         {

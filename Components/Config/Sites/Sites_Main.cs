@@ -40,7 +40,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             var properties = site.GetType().GetProperties();
 
             subControls[0] = new ConfigString("URL", properties[0], site);
-            subControls[1] = new SiteHeight(site, properties[1]);
+            subControls[1] = new SiteHeight(properties[1], site);
             subControls[2] = new ConfigNumber("Duration", properties[2], site, true);
 
             container.AddControls(subControls);

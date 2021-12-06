@@ -11,13 +11,12 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public partial class Notifications
     {
-        public class NotificationsSchedule : Config_ComplexProperty
+        public class NotificationsSchedule : Config_BaseProperty
         {
             public List<string> CurrentTimes { get; private set; }
-            public NotificationsSchedule(Site site, PropertyInfo property = null) :
-                base(site, new string[2] { "Simple", "Complex" }, property)
+            public NotificationsSchedule(PropertyInfo property, Notification notification)
+                : base(property, notification)
             {
-                
             }
         }
     }

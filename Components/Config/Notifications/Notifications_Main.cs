@@ -37,7 +37,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             var subControls = new Control[4];
             var properties = notification.GetType().GetProperties();
 
-            subControls[0] = new Label() { Text = "IN_PROGRESS" };
+            subControls[0] = new NotificationsSchedule(properties[0], notification);
             subControls[1] = new ConfigString("Audio File", properties[1], notification);
             subControls[2] = new ConfigString("Message", properties[2], notification);
             subControls[3] = new ConfigNumber("Duration", properties[3], notification, true);

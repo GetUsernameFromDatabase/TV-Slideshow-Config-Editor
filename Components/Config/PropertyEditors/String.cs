@@ -5,7 +5,7 @@ using TV_Slideshow_Config_Editor.Logic;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class ConfigString : Config_SimpleProperty
+    public class ConfigString : Config_BaseProperty
     {
         public ConfigString(string label, PropertyInfo property, object obj) : base(property, obj)
         {

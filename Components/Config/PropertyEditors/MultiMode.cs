@@ -4,64 +4,14 @@ using System.Windows.Forms;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class Config_SimpleProperty : TableLayoutPanel
-    {
-        public object BoundObj { get; protected set; }
-        public PropertyInfo Property { get; protected set; }
-
-        public Config_SimpleProperty()
-        {
-            StyleMe();
-        }
-
-        public Config_SimpleProperty(PropertyInfo property, object obj)
-        {
-            this.Property = property;
-            this.BoundObj = obj;
-            StyleMe();
-        }
-
-        private void StyleMe()
-        {
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.Dock = DockStyle.Fill;
-            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
-
-            this.RowCount = 1;
-            this.ColumnCount = 2;
-            this.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
-        }
-
-        protected Label GetLabel(string LabelText = "")
-        {
-            return new Label()
-            {
-                Text = LabelText,
-                TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
-            };
-        }
-
-        protected MaskedTextBox GetEditBox()
-        {
-            var editBox = new MaskedTextBox()
-            {
-                Dock = DockStyle.Fill,
-            };
-            if (this.Property != null)
-                editBox.Text = this.Property.GetValue(this.BoundObj).ToString();
-            return editBox;
-        }
-    }
-
-    public class Config_ComplexProperty : Config_SimpleProperty
+    public class Config_MultipleModeProperty : Config_BaseProperty
     {
         public Control ActiveEditor { get; protected set; }
         public Control[] AvailableEditors { get; protected set; }
 
         public InputModeChoice ModeChooser { get; protected set; }
         readonly protected string[] AvailableModes;
-        public Config_ComplexProperty(object obj, string[] Modes, PropertyInfo property) 
+        public Config_MultipleModeProperty(string[] Modes, PropertyInfo property, object obj)
             : base(property, obj)
         {
             this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
@@ -72,8 +22,6 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             this.ModeChooser = new InputModeChoice(AvailableModes);
 
             var Choices = ModeChooser.Choices;
-            // This is a hacky way to get it to work -
-            // would like the following method to occure only once
             Choices.SelectionChangeCommitted += ModeChange;
             this.Controls.Add(ModeChooser);
         }

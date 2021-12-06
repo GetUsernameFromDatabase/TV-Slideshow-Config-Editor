@@ -55,13 +55,19 @@
     <Compile Include="Components\Config\Notifications\Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\Config\PropertyEditors\ListProperty.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Config\PropertyEditors\BaseProperty.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Config\Sites\Height.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Config\ComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config\Property.cs">
+    <Compile Include="Components\Config\PropertyEditors\MultiMode.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\FlowContainer.cs">
@@ -84,10 +90,10 @@
     </Compile>
     <Compile Include="Configurations.cs" />
     <Compile Include="Logic\String_Manipulation.cs" />
-    <Compile Include="Components\Config\String.cs">
+    <Compile Include="Components\Config\PropertyEditors\String.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config\Number.cs">
+    <Compile Include="Components\Config\PropertyEditors\Number.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Logic\Populate.cs">

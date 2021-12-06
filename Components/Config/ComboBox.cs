@@ -11,7 +11,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         }
     }
 
-    public class InputModeChoice : Config_SimpleProperty
+    public class InputModeChoice : Config_BaseProperty
     {
         readonly public Config_ComboBox Choices;
         public InputModeChoice(string[] modes)
