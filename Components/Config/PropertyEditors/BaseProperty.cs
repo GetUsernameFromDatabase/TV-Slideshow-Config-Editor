@@ -42,12 +42,13 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             this.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
         }
 
-        protected Label GetLabel(string LabelText = "")
+        public Label GetLabel(string LabelText = "")
         {
             return new Label()
             {
                 Text = LabelText,
                 TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                Dock = DockStyle.Fill
             };
         }
 
