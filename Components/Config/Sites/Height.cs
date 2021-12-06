@@ -11,20 +11,17 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public partial class Sites
     {
-        public class SiteHeight : Config_ComplexProperty
+        public class SiteHeight : Config_MultipleModeProperty
         {
-            public SiteHeight(Site site, PropertyInfo property) :
-                base(site, new string[2] { "Simple", "Complex" }, property)
+            public SiteHeight(PropertyInfo property, Site site) :
+                base(new string[2] { "Simple", "Complex" }, property, site)
             {
-                this.BoundObj = site;
-                this.Property = property;
-                var propType = property.GetValue(BoundObj).GetType();
-
                 // Making editors modifies the property value
                 var SimpleHeight = MakeSimpleHeightEditor();
                 var ComplexHeight = MakeComplexHeightEditor();
                 AvailableEditors = new Control[2] { SimpleHeight, ComplexHeight };
 
+                var propType = property.GetValue(BoundObj).GetType();
                 // Hides unecessary editor and changes property value back
                 ChangeActiveEditor(typeof(string) == propType ? 0 : 1);
                 var heightChooser = ModeChooser.Choices;
