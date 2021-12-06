@@ -9,27 +9,17 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
     {
         public ConfigString(string label, PropertyInfo property, object obj) : base(property, obj)
         {
-            this.Construct(label);
+            this.ConstructEditableProperty(label, Event_TextChanged);
         }
         public ConfigString(PropertyInfo property, object obj) : base(property, obj)
         {
             var label = String_Manipulation.CamelCaseToNormal(property.Name);
-            this.Construct(label);
-        }
-
-        private void Construct(string label)
-        {
-            this.Controls.Add(GetLabel(label));
-
-            var controlEdit = GetEditBox();
-            controlEdit.AsciiOnly = true;
-            controlEdit.TextChanged += new EventHandler(Event_TextChanged);
-            this.Controls.Add(controlEdit);
+            this.ConstructEditableProperty(label, Event_TextChanged);
         }
 
         protected void Event_TextChanged(object sender, EventArgs e)
         {
-            var c = sender as MaskedTextBox;
+            var c = sender as TextBox;
             c.Text = c.Text.Trim();
             var value = c.Text;
             Property.SetValue(BoundObj, value);

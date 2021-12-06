@@ -21,6 +21,15 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             StyleMe();
         }
 
+        protected void ConstructEditableProperty(string label,
+            Action<object, EventArgs> TextChangeEvent)
+        {
+            this.Controls.Add(GetLabel(label));
+            var controlEdit = GetEditBox();
+            controlEdit.TextChanged += new EventHandler(TextChangeEvent);
+            this.Controls.Add(controlEdit);
+        }
+
         private void StyleMe()
         {
             this.AutoSize = true;
@@ -42,9 +51,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             };
         }
 
-        protected MaskedTextBox GetEditBox()
+        protected TextBox GetEditBox()
         {
-            var editBox = new MaskedTextBox()
+            var editBox = new TextBox()
             {
                 Dock = DockStyle.Fill,
             };
