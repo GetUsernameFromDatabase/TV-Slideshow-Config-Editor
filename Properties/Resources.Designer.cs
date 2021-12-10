@@ -128,22 +128,23 @@ namespace TV_Slideshow_Config_Editor.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///  &quot;defaults&quot;: {
-        ///    &quot;durations&quot;: {
-        ///      &quot;site&quot;: 50,
-        ///      &quot;slide&quot;: 15,
-        ///      &quot;notification&quot;: 60
-        ///    }
-        ///  },
-        ///  &quot;showTime&quot;: {
-        ///    &quot;duration&quot;: 2,
-        ///    &quot;interval&quot;: 5
-        ///  },
-        ///  &quot;sites&quot;: [
-        ///    {
-        ///      &quot;url&quot;: &quot;/001SlideShow/html/index.html&quot;
-        ///    }
-        ///  ],
+        ///	&quot;defaults&quot;: {
+        ///		&quot;durations&quot;: {
+        ///			&quot;site&quot;: 50,
+        ///			&quot;slide&quot;: 15,
+        ///			&quot;notification&quot;: 60
+        ///		}
+        ///	},
+        ///	&quot;showTime&quot;: {
+        ///		&quot;duration&quot;: 2,
+        ///		&quot;interval&quot;: 5
+        ///	},
+        ///	&quot;sites&quot;: [
+        ///		{
+        ///			&quot;url&quot;: &quot;/001SlideShow/html/index.html&quot;,
+        ///			&quot;height&quot;: &quot;100%&quot;
+        ///		}
+        ///	]
         ///}.
         /// </summary>
         internal static string DefaultJSON {

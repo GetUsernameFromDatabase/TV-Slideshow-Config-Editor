@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,23 +14,62 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
     {
         public class NotificationsSchedule : Config_BaseProperty
         {
-            public List<string> CurrentTimes { get; private set; }
-            public string WeekDays { get; private set; }
+            private Schedule Schedule { get; set; }
             public NotificationsSchedule(PropertyInfo property, Notification notification)
                 : base(property, notification)
             {
-                var schedule = property.GetValue(notification) as Schedule;
-                this.CurrentTimes = schedule.time;
-                this.WeekDays = schedule.weekDays.ToUpper();
-                this.Controls.Add(MakeWeekndControl());
+                var PropValue = Property.GetValue(notification);
+                this.Schedule = PropValue as Schedule;
+                if (Schedule == null)
+                {
+                    PropValue = ParseImportedSchedule(PropValue);
+                    Property.SetValue(notification, PropValue);
+                    Schedule = Property.GetValue(notification) as Schedule;
+                }
+
+                this.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+                this.ColumnCount = 1;
+                this.RowCount = 2;
+
+                var timeControl = MakeTimeControl();
+                var wkndControl = MakeWeekndControl();
+                this.Controls.AddRange(new Control[2] { timeControl, wkndControl });
             }
 
-            // private Config_ListProperty MakeTimeControl()
-            // {
-            //     var control = new Config_ListProperty();
-            //     return control;
-            // }
-            // 
+            private object ParseImportedSchedule(object property)
+            {
+                var SchedType = property.GetType();
+                if (typeof(string) == SchedType)
+                    property = new Schedule() { times = new List<string>() { (string)property } };
+                else if (typeof(JArray) == SchedType)
+                {
+                    var time = (property as JArray).ToObject<List<string>>();
+                    property = new Schedule() { times = time };
+                }
+                else
+                { // JsonSerializationException
+                    var schedule = property as JObject;
+                    var WDPropName = "weekDays";
+                    try
+                    {
+                        var weekDays = schedule.GetValue(WDPropName).ToObject<string[]>();
+                        var weekDaysAsString = string.Join("", weekDays);
+                        schedule[WDPropName] = weekDaysAsString; 
+                    }
+                    catch (JsonSerializationException) { } // Intended case: Couldn't conver to string[]
+                    catch (ArgumentNullException) { } // Intended case: "weekDays" was null
+                    schedule[WDPropName] = schedule[WDPropName].ToObject<string>().ToUpper();
+                    property = JsonConvert.DeserializeObject<Schedule>(schedule.ToString());
+                }
+                return property;
+            }
+
+            private Config_ListProperty MakeTimeControl()
+            {
+                var control = new Config_ListProperty("Time", Schedule.times);
+                return control;
+            }
+
             private Config_BaseProperty MakeWeekndControl()
             {
                 var weekDays = new Config_BaseProperty();
@@ -40,9 +80,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
                 var weekDayChoices = new FlowLayoutPanel()
                 {
-                    AutoSize = true,
-                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                    MaximumSize = new Size(170, 0),
+                    Size = new Size(158, 44),
                 };
                 weekDayChoices.Controls.AddRange(Days);
 
@@ -52,11 +90,12 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
             private CheckBox MakeWeekday(string Text)
             {
+                var days = Schedule.weekDays;
                 var checkBox = new CheckBox()
                 {
                     Text = Text,
                     AutoSize = true,
-                    Checked = this.WeekDays.Contains(Text), // Assumes Text is upper
+                    Checked = days.Contains(Text), // Assumes Text is upper
                 };
                 checkBox.CheckedChanged += WeekDay_CheckedChanged;
                 return checkBox;
@@ -66,23 +105,11 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             {
                 var c = sender as CheckBox;
                 var day = c.Text;
-                if (WeekDays.Contains(day)) WeekDays = WeekDays.Replace(day, "");
-                else WeekDays += day; // Assumes Weekdays is setup correctly at start
-                UpdateWeekdays();
-            }
+                var days = Schedule.weekDays;
 
-            private void UpdateWeekdays()
-            {
-                var schedule = Property.GetValue(BoundObj) as Schedule;
-                schedule.weekDays = WeekDays;
-                this.Property.SetValue(BoundObj, schedule);
-            }
-
-            private void UpdateTimes()
-            {
-                var schedule = Property.GetValue(BoundObj) as Schedule;
-                schedule.time = CurrentTimes;
-                this.Property.SetValue(BoundObj, schedule);
+                if (days.Contains(day)) days = days.Replace(day, "");
+                else days += day; // Assumes Weekdays is setup correctly at start
+                Schedule.weekDays = days;
             }
         }
     }

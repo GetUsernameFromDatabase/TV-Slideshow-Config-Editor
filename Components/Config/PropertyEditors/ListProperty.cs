@@ -1,69 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
-    public class Config_ListProperty : Config_BaseProperty
+    public class Config_ListProperty : TableLayoutPanel
     {
-        public Config_ListProperty(object obj, PropertyInfo property)
-            : base(property, obj)
+        public DataGridView DataGridView { get; }
+        public List<string> CurrentList;
+
+        public Config_ListProperty(string Title, List<string> StartingList)
         {
-            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-            this.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-            ColumnCount = 1;
+            CurrentList = StartingList;
+            this.DataGridView = MakeDataGridView(Title);
+
+            var DataManipulator = MakeDataManipulatorButtons();
+            this.Controls.AddRange(new Control[2] { DataGridView, DataManipulator });
+            StyleMe();
         }
 
-        public void AddControl(Control control)
+        protected void StyleMe()
         {
-            var WrappedControl = WrapControlWithRemoveButton(control);
-            this.Controls.Add(WrappedControl);
+            this.Dock = DockStyle.Fill;
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
+            this.RowCount = 1;
+            this.ColumnCount = 2;
+            this.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            this.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         }
 
-        protected Control WrapControlWithRemoveButton(Control control)
+        protected DataGridView MakeDataGridView(string Title)
         {
-            // This assumes Label is [0] control
-            var cntrlLabel = control.Controls[0] as Label;
-            var newLabel = GetModifiedLabel(cntrlLabel);
-
-            control.Controls.Remove(cntrlLabel);
-            cntrlLabel.Dispose();
-
-            control.Controls.Add(newLabel);
-            control.Controls.SetChildIndex(newLabel, 0);
-            return control;
-        }
-
-        protected FlowLayoutPanel GetModifiedLabel(Label control)
-        {
-            var newLabel = new FlowLayoutPanel()
+            DataTable dt = new DataTable(Title);
+            dt.Columns.Add(Title, typeof(string));
+            for (int i = 0; i < dt.Columns.Count; i++)
             {
+                var column = dt.Columns[i];
+                column.AllowDBNull = false;
+            }
+
+            foreach (var item in CurrentList)
+                dt.Rows.Add(item);
+            var ctrl = new DataGridView()
+            {
+                DataSource = dt,
                 Dock = DockStyle.Fill,
+                Height = 70, // Weird but required
+                ScrollBars = ScrollBars.Both,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                AllowUserToResizeColumns = false,
+                AllowUserToResizeRows = false,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
             };
-            newLabel.Controls.AddRange(new Control[2] { control,
-                GetModifyControlButton() });
-            return newLabel;
+            return ctrl;
         }
 
-        protected Button GetModifyControlButton()
+        protected FlowContainer MakeDataManipulatorButtons()
         {
-            var btn = new Button()
+            var cntr = new FlowContainer();
+            cntr.Controls.Add(MakeRemoveButton());
+            return cntr;
+        }
+
+        protected Button MakeRemoveButton()
+        {
+            var removeBtn = new Button()
             {
                 Text = "-",
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Font = new Font(Font.FontFamily, 13),
+                Size = new Size(32, 32),
+                TextAlign = ContentAlignment.TopCenter,
+                Padding = new Padding(0),
             };
-            btn.ControlRemoved += RemoveListPropertyControl;
-            return btn;
+            removeBtn.Click += RemoveButton_Click;
+            return removeBtn;
         }
 
-        private void RemoveListPropertyControl(object sender, ControlEventArgs e)
+        private void RemoveButton_Click(object sender, EventArgs e)
         {
-            var btn = sender as Button;
-            var listPropContainer = btn.Parent.Parent;
-            listPropContainer.Parent.Controls.Remove(listPropContainer);
-            listPropContainer.Dispose();
+            foreach (var item in DataGridView.SelectedRows)
+            {
+                var row = item as DataGridViewRow;
+                if (row.Index < DataGridView.RowCount - 1)
+                    DataGridView.Rows.Remove(row);
+            }
         }
     }
 }

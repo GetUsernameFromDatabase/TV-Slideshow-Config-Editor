@@ -41,7 +41,7 @@ namespace TV_Slideshow_Config_Editor.ConfigInterface
     public class Site
     {
         public string url { get; set; } = "./";
-        public object height { get; set; } = "100%";
+        public object height { get; set; }
         public int? duration { get; set; } = 0;
     }
 
@@ -49,7 +49,7 @@ namespace TV_Slideshow_Config_Editor.ConfigInterface
         Justification = "JSON Object")]
     public class Notification
     {
-        public Schedule schedule { get; set; } = new Schedule();
+        public object schedule { get; set; }
         public string audioFile { get; set; } = "";
         public string message { get; set; } = "";
         public int? duration { get; set; } = 0;
@@ -59,7 +59,7 @@ namespace TV_Slideshow_Config_Editor.ConfigInterface
         Justification = "JSON Object")]
     public class Schedule
     {
-        public List<string> time { get; set; } = new List<string>() { "12:00" };
+        public List<string> times { get; set; }
         public string weekDays { get; set; } = "";
     }
 }

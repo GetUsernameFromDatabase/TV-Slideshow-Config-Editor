@@ -7,17 +7,18 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public class ConfigString : Config_BaseProperty
     {
+
         public ConfigString(string label, PropertyInfo property, object obj) : base(property, obj)
         {
-            this.ConstructEditableProperty(label, Event_TextChanged);
+            this.ConstructEditableProperty(label, TextChanged_Property);
         }
         public ConfigString(PropertyInfo property, object obj) : base(property, obj)
         {
             var label = String_Manipulation.CamelCaseToNormal(property.Name);
-            this.ConstructEditableProperty(label, Event_TextChanged);
+            this.ConstructEditableProperty(label, TextChanged_Property);
         }
 
-        protected void Event_TextChanged(object sender, EventArgs e)
+        protected void TextChanged_Property(object sender, EventArgs e)
         {
             var c = sender as TextBox;
             c.Text = c.Text.Trim();

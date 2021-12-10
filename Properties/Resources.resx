@@ -226,7 +226,10 @@
                 }
               },
               "weekDays": {
-                "type": "string"
+                "type": ["string", "array"],
+                "items": {
+                  "type": "string"
+                }
               }
             },
             "required": [
@@ -264,22 +267,23 @@
   </data>
   <data name="DefaultJSON" xml:space="preserve">
     <value>{
-  "defaults": {
-    "durations": {
-      "site": 50,
-      "slide": 15,
-      "notification": 60
-    }
-  },
-  "showTime": {
-    "duration": 2,
-    "interval": 5
-  },
-  "sites": [
-    {
-      "url": "/001SlideShow/html/index.html"
-    }
-  ],
+	"defaults": {
+		"durations": {
+			"site": 50,
+			"slide": 15,
+			"notification": 60
+		}
+	},
+	"showTime": {
+		"duration": 2,
+		"interval": 5
+	},
+	"sites": [
+		{
+			"url": "/001SlideShow/html/index.html",
+			"height": "100%"
+		}
+	]
 }</value>
   </data>
 </root>

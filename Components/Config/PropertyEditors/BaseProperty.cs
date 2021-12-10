@@ -20,6 +20,17 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             this.BoundObj = obj;
             StyleMe();
         }
+        private void StyleMe()
+        {
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.Dock = DockStyle.Fill;
+            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
+
+            this.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
+            this.ColumnCount = 2;
+            this.RowCount = 1;
+        }
 
         protected void ConstructEditableProperty(string label,
             Action<object, EventArgs> TextChangeEvent)
@@ -28,18 +39,6 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             var controlEdit = GetEditBox();
             controlEdit.TextChanged += new EventHandler(TextChangeEvent);
             this.Controls.Add(controlEdit);
-        }
-
-        private void StyleMe()
-        {
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.Dock = DockStyle.Fill;
-            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
-
-            this.RowCount = 1;
-            this.ColumnCount = 2;
-            this.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
         }
 
         public Label GetLabel(string LabelText = "")

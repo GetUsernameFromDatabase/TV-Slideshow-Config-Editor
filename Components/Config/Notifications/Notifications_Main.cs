@@ -13,31 +13,29 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         {
             this.ControlRemoved += NotificationRemoved;
             this.NoOtherControlButton = MakeNoOtherControlButton(NoOtherControls_Click);
-
             this.CurrentNotifications = ConfigSlice;
-            for (int i = 0; i < ConfigSlice.Count; i++)
-            {
-                var slice = ConfigSlice[i];
-                var title = String_Manipulation.MakeControlTitle(i, "Notification");
-                var control = NotificationIntoControls(title, slice);
-                this.Controls.Add(control);
-            }
 
+            var controlsToBeAdded = ConfigSlicePopulate("Notification",
+                ConfigSlice.ToArray(), NotificationIntoControls);
+            this.Controls.AddRange(controlsToBeAdded.ToArray());
             ShowEmptyPageControlButton_IfNeeded();
         }
 
         public Notification MakeDefault()
         {
-            var notification = new Notification();
+            var notification = new Notification()
+            {
+                schedule = new Schedule() { times = new List<string>() { "12:00" } },
+            };
             return notification;
         }
-        private ConfigContainer NotificationIntoControls(string Title, Notification notification)
+        private ConfigContainer NotificationIntoControls(string Title, object notification)
         {
             var container = new ConfigContainer(Title);
             var subControls = new Control[4];
             var properties = notification.GetType().GetProperties();
 
-            subControls[0] = new NotificationsSchedule(properties[0], notification);
+            subControls[0] = new NotificationsSchedule(properties[0], notification as Notification);
             subControls[1] = new ConfigString("Audio File", properties[1], notification);
             subControls[2] = new ConfigString("Message", properties[2], notification);
             subControls[3] = new ConfigNumber("Duration", properties[3], notification, true);
@@ -63,15 +61,13 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
         private void NotificationRemoved(object sender, ControlEventArgs e)
         {
-            var ConfigInfo = GetConfigInfo_OnControlRemoved(e);
+            var ConfigInfo = OnControlRemoved_GetConfigInfo(e);
             if (ConfigInfo == null) return;
             var (removedControl, BoundObject) = ConfigInfo;
 
             var notification = BoundObject as Notification;
             CurrentNotifications.Remove(notification);
-
-            if (!ShowEmptyPageControlButton_IfNeeded())
-                UpdateOtherTitles(GetConfigContainerIndex(removedControl));
+            OnControlRemoved_Cleanup(removedControl);
         }
 
         private void NoOtherControls_Click(object sender, EventArgs e)

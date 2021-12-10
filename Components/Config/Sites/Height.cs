@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
@@ -16,14 +12,16 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             public SiteHeight(PropertyInfo property, Site site) :
                 base(new string[2] { "Simple", "Complex" }, property, site)
             {
+                // Needs to be before editors are made
+                var propType = property.GetValue(BoundObj).GetType();
                 // Making editors modifies the property value
                 var SimpleHeight = MakeSimpleHeightEditor();
                 var ComplexHeight = MakeComplexHeightEditor();
-                AvailableEditors = new Control[2] { SimpleHeight, ComplexHeight };
 
-                var propType = property.GetValue(BoundObj).GetType();
-                // Hides unecessary editor and changes property value back
+                AvailableEditors = new Control[2] { SimpleHeight, ComplexHeight };
                 ChangeActiveEditor(typeof(string) == propType ? 0 : 1);
+
+                // Hides unecessary editor and changes property value back
                 var heightChooser = ModeChooser.Choices;
                 heightChooser.VisibleChanged += SetDefault_SelectedIndex;
 

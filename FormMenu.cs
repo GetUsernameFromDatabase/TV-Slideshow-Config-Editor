@@ -12,9 +12,10 @@ namespace TV_Slideshow_Config_Editor
     public partial class ConfigEditor : Form
     {
         public JSchema Schema { get; private set; } = JSchema.Parse(Properties.Resources.ConfigSchema);
-        readonly private JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        readonly static public JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
-            NullValueHandling = NullValueHandling.Ignore
+            NullValueHandling = NullValueHandling.Ignore,
+            DateTimeZoneHandling = DateTimeZoneHandling.Utc,
         };
         public Configurations Config { get; private set; }
         public string FilePath { get; private set; }
@@ -54,7 +55,8 @@ namespace TV_Slideshow_Config_Editor
         private void MenuFile_New_Click(object sender, EventArgs e)
         {
             var source = Properties.Resources.DefaultJSON;
-            this.Config = JsonConvert.DeserializeObject<Configurations>(source);
+            this.Config = JsonConvert.DeserializeObject<Configurations>(source,
+                SerializerSettings);
             PopulatePages();
         }
 

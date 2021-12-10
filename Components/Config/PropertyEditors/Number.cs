@@ -11,16 +11,16 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         public ConfigNumber(string label, PropertyInfo property, object obj,
             bool nullTheZero = false) : base(property, obj)
         {
-            this.ConstructEditableProperty(label, Event_TextChanged);
+            this.ConstructEditableProperty(label, TextChanged_Property);
             if (!nullTheZero) return; var TextEditor = this.Controls[1];
             if (TextEditor.Text == "0") TextEditor.Text = "";
         }
         public ConfigNumber(PropertyInfo property, object obj) : base(property, obj)
         {
             var label = String_Manipulation.CamelCaseToNormal(property.Name);
-            this.ConstructEditableProperty(label, Event_TextChanged);
+            this.ConstructEditableProperty(label, TextChanged_Property);
         }
-        protected void Event_TextChanged(object sender, EventArgs e)
+        protected void TextChanged_Property(object sender, EventArgs e)
         {
             var rgx = new Regex(@"\D");
             var c = sender as TextBox;
