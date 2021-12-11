@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
+using System.Text.RegularExpressions;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
@@ -54,7 +55,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                     {
                         var weekDays = schedule.GetValue(WDPropName).ToObject<string[]>();
                         var weekDaysAsString = string.Join("", weekDays);
-                        schedule[WDPropName] = weekDaysAsString; 
+                        schedule[WDPropName] = weekDaysAsString;
                     }
                     catch (JsonSerializationException) { } // Intended case: Couldn't conver to string[]
                     catch (ArgumentNullException) { } // Intended case: "weekDays" was null
@@ -66,7 +67,20 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
             private Config_ListProperty MakeTimeControl()
             {
-                var control = new Config_ListProperty("Time", Schedule.times);
+                Color IsTimeIncorrect(DataGridViewRow row)
+                {
+                    var time = row.Cells[0].Value as string;
+                    if (time == null) return Color.Empty;
+                    Color colour = Color.Empty;
+
+                    var isDate = DateTime.TryParse(time, out DateTime asDate);
+                    if (isDate)
+                        colour = Color.LightGreen;
+                    else colour = Color.LightCoral;
+                    return colour;
+                }
+                var control = new Config_ListProperty("Time", Schedule.times,
+                    IsTimeIncorrect);
                 return control;
             }
 

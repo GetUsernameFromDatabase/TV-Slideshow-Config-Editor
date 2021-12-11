@@ -9,15 +9,19 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public class Config_ListProperty : TableLayoutPanel
     {
+        public Func<DataGridViewRow, Color> RowCheck { get; private set; }
         public DataGridView DataDisplay { get; }
         public List<string> CurrentList;
 
-        public Config_ListProperty(string Title, List<string> StartingList)
+        public Config_ListProperty(string Title, List<string> StartingList,
+            Func<DataGridViewRow, Color> rowCheck = null)
         {
             CurrentList = StartingList;
-            this.DataDisplay = MakeDataGridView(Title);
+            RowCheck = rowCheck;
 
+            this.DataDisplay = MakeDataGridView(Title);
             var DataManipulator = MakeDataManipulatorButtons();
+
             this.Controls.AddRange(new Control[2] { DataDisplay, DataManipulator });
             StyleMe();
         }
@@ -54,15 +58,20 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 dt.Columns.Add(columnHeader, columnType);
             }
 
+            DisallowNullOnAll(dt);
+            return dt;
+        }
+
+        protected void DisallowNullOnAll(DataTable dt)
+        {
             for (int i = 0; i < dt.Columns.Count; i++)
             {
                 var column = dt.Columns[i];
                 column.AllowDBNull = false;
             }
-            return dt;
         }
 
-        private void Dt_RowChanged(object sender, DataRowChangeEventArgs e)
+        private void DataTable_RowChanged(object sender, DataRowChangeEventArgs e)
         {
             UpdateCurrentList();
         }
@@ -71,6 +80,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         {
             var TableInitInfo = new (string, Type)[1] { (Title, typeof(string)) };
             DataTable dt = MakeDataTable(Title, TableInitInfo);
+            dt.Columns[0].AllowDBNull = false;
             foreach (var item in CurrentList)
                 dt.Rows.Add(item);
 
@@ -85,9 +95,18 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 AllowUserToResizeRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
             };
+            if (RowCheck != null) ctrl.RowPrePaint += DataTable_RowPrePaint;
             // Should be After binding DataTable with DataGridView
-            dt.RowChanged += Dt_RowChanged;
+            dt.RowChanged += DataTable_RowChanged;
             return ctrl;
+        }
+
+        private void DataTable_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            var c = sender as DataGridView;
+            var row = c.Rows[e.RowIndex];
+
+            row.DefaultCellStyle.BackColor = RowCheck(row);
         }
 
         protected FlowContainer MakeDataManipulatorButtons()
