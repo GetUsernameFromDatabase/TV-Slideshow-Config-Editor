@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
-using TV_Slideshow_Config_Editor.ConfigVisualised;
 
 namespace TV_Slideshow_Config_Editor
 {

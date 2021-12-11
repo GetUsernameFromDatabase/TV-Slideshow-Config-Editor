@@ -29,6 +29,7 @@ namespace TV_Slideshow_Config_Editor
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigEditor));
             this.TabControl_MainConfig = new System.Windows.Forms.TabControl();
             this.TabPage_Defaults = new System.Windows.Forms.TabPage();
             this.TabPage_TimeDisplay = new System.Windows.Forms.TabPage();
@@ -180,6 +181,7 @@ namespace TV_Slideshow_Config_Editor
             this.ClientSize = new System.Drawing.Size(922, 509);
             this.Controls.Add(this.TabControl_MainConfig);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ConfigEditor";
             this.Tag = "defaults";
