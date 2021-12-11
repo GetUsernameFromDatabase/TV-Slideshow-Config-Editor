@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,19 +9,18 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public class Config_ListProperty : TableLayoutPanel
     {
-        public DataGridView DataGridView { get; }
+        public DataGridView DataDisplay { get; }
         public List<string> CurrentList;
 
         public Config_ListProperty(string Title, List<string> StartingList)
         {
             CurrentList = StartingList;
-            this.DataGridView = MakeDataGridView(Title);
+            this.DataDisplay = MakeDataGridView(Title);
 
             var DataManipulator = MakeDataManipulatorButtons();
-            this.Controls.AddRange(new Control[2] { DataGridView, DataManipulator });
+            this.Controls.AddRange(new Control[2] { DataDisplay, DataManipulator });
             StyleMe();
         }
-
         protected void StyleMe()
         {
             this.Dock = DockStyle.Fill;
@@ -33,18 +33,47 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             this.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         }
 
-        protected DataGridView MakeDataGridView(string Title)
+        public void UpdateCurrentList()
         {
-            DataTable dt = new DataTable(Title);
-            dt.Columns.Add(Title, typeof(string));
+
+            var dt = DataDisplay.DataSource as DataTable;
+            CurrentList.Clear();
+            foreach (DataRow row in dt.Rows)
+            {
+                var item = row.ItemArray[0] as string;
+                if (item != "") CurrentList.Add(item);
+            }
+        }
+
+        protected DataTable MakeDataTable(string TableName, (string, Type)[] Columns)
+        {
+            DataTable dt = new DataTable(TableName);
+            foreach (var Column in Columns)
+            {
+                var (columnHeader, columnType) = Column;
+                dt.Columns.Add(columnHeader, columnType);
+            }
+
             for (int i = 0; i < dt.Columns.Count; i++)
             {
                 var column = dt.Columns[i];
                 column.AllowDBNull = false;
             }
+            return dt;
+        }
 
+        private void Dt_RowChanged(object sender, DataRowChangeEventArgs e)
+        {
+            UpdateCurrentList();
+        }
+
+        protected DataGridView MakeDataGridView(string Title)
+        {
+            var TableInitInfo = new (string, Type)[1] { (Title, typeof(string)) };
+            DataTable dt = MakeDataTable(Title, TableInitInfo);
             foreach (var item in CurrentList)
                 dt.Rows.Add(item);
+
             var ctrl = new DataGridView()
             {
                 DataSource = dt,
@@ -56,6 +85,8 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 AllowUserToResizeRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
             };
+            // Should be After binding DataTable with DataGridView
+            dt.RowChanged += Dt_RowChanged;
             return ctrl;
         }
 
@@ -82,11 +113,11 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            foreach (var item in DataGridView.SelectedRows)
+            foreach (var item in DataDisplay.SelectedRows)
             {
                 var row = item as DataGridViewRow;
-                if (row.Index < DataGridView.RowCount - 1)
-                    DataGridView.Rows.Remove(row);
+                if (row.Index < DataDisplay.RowCount - 1)
+                    DataDisplay.Rows.Remove(row);
             }
         }
     }
