@@ -147,8 +147,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\TV_Slideshow_Config_Editor.Properties.Resources.datasource" />
-    <None Include="Properties\DataSources\TV_Slideshow_Config_Editor.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
