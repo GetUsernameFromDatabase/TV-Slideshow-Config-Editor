@@ -8,6 +8,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public partial class Sites
     {
+        static string DefaultHeight = "100%";
         public class SiteHeight : Config_MultipleModeProperty
         {
             public SiteHeight(PropertyInfo property, Site site) :
@@ -15,11 +16,15 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             {
                 // Needs to be before editors are made
                 var propType = property.GetValue(BoundObj)?.GetType();
-                if (propType == null) property.SetValue(BoundObj, "100%");
+                if (propType == null)
+                {
+                    property.SetValue(BoundObj, Sites.DefaultHeight);
+                    propType = Sites.DefaultHeight.GetType();
+                }
+
                 // Making editors modifies the property value
                 var SimpleHeight = MakeSimpleHeightEditor();
                 var ComplexHeight = MakeComplexHeightEditor();
-
                 AvailableEditors = new Control[2] { SimpleHeight, ComplexHeight };
                 ChangeActiveEditor(typeof(string) == propType ? 0 : 1);
 
@@ -66,8 +71,8 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 "IDE1006:Naming Styles", Justification = "JSON Object")]
             private class ComplexHeight
             {
-                public string singleColumn { get; set; } = "100%";
-                public string multiColumn { get; set; } = "100%";
+                public string singleColumn { get; set; } = Sites.DefaultHeight;
+                public string multiColumn { get; set; } = Sites.DefaultHeight;
             }
         }
     }
