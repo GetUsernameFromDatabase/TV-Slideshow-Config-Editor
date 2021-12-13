@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Text.RegularExpressions;
 using TV_Slideshow_Config_Editor.ConfigInterface;
 
 namespace TV_Slideshow_Config_Editor.Logic

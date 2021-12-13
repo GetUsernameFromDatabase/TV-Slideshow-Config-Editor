@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
-using System.Text.RegularExpressions;
 
 namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
@@ -69,8 +68,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             {
                 Color IsTimeIncorrect(DataGridViewRow row)
                 {
-                    var time = row.Cells[0].Value as string;
-                    if (time == null) return Color.Empty;
+                    if (!(row.Cells[0].Value is string time)) return Color.Empty;
                     Color colour = Color.Empty;
 
                     var isDate = DateTime.TryParse(time, out DateTime asDate);

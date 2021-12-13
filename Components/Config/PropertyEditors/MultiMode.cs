@@ -14,26 +14,33 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
         public Config_MultipleModeProperty(string[] Modes, PropertyInfo property, object obj)
             : base(property, obj)
         {
-            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-            this.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-            ColumnCount = 1;
+            StyleMe();
 
             AvailableModes = Modes;
             this.ModeChooser = new InputModeChoice(AvailableModes);
 
             var Choices = ModeChooser.Choices;
             Choices.SelectionChangeCommitted += ModeChange;
+
             this.Controls.Add(ModeChooser);
+        }
+        private void StyleMe()
+        {
+            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            this.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+            this.ColumnCount = 1;
         }
 
         protected void HideOtherEditors()
         {
+            SuspendLayout();
             foreach (var item in AvailableEditors)
             {
                 var turnedOn = item == ActiveEditor;
                 item.Visible = turnedOn;
                 item.Enabled = turnedOn;
             }
+            ResumeLayout();
         }
 
         protected void ModeChange(object sender, EventArgs e)

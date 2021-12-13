@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Reflection;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
@@ -8,7 +7,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 {
     public partial class Sites
     {
-        static string DefaultHeight = "100%";
+        readonly static string DefaultHeight = "100%";
         public class SiteHeight : Config_MultipleModeProperty
         {
             public SiteHeight(PropertyInfo property, Site site) :
