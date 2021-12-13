@@ -13,15 +13,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
 
         public ConfigContainer(string TitleLabel)
         {
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-
-            this.ColumnCount = 1;
-            this.RowCount = 2;
-
-            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-            this.CellPaint += PaintCellBorders;
-
+            StyleMe();
             var Title = new Label()
             {
                 Dock = DockStyle.Fill,
@@ -34,32 +26,16 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             };
             this.Controls.AddRange(new Control[2] { Title, SubOptions });
         }
-
-        public class ControlButton : Button
+        private void StyleMe()
         {
-            public ControlButton(bool left)
-            {
-                if (left)
-                {
-                    Text = "<+";
-                    Tag = -1;
-                }
-                else
-                {
-                    Text = "+>";
-                    Tag = 1;
-                }
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-                AutoSize = true;
-                AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            }
+            this.ColumnCount = 1;
+            this.RowCount = 2;
 
-            public ControlButton(string DeleteButtonLabel)
-            {
-                Text = DeleteButtonLabel;
-                Tag = 0;
-                Dock = DockStyle.Fill;
-            }
+            this.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            this.CellPaint += PaintCellBorders;
         }
 
         public void MakeThisDeletable(Action<object, EventArgs> buttonClickCallback)
@@ -74,9 +50,9 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
             };
 
-            var buttonLeft = new ControlButton(true);
+            var buttonLeft = new Container_Button(true);
             buttonLeft.Click += new EventHandler(buttonClickCallback);
-            var buttonRight = new ControlButton(false);
+            var buttonRight = new Container_Button(false);
             buttonRight.Click += new EventHandler(buttonClickCallback);
 
             Header.Controls.AddRange(new Control[3] { buttonLeft, Label, buttonRight });
@@ -84,7 +60,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             Header.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             Header.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
-            var buttonDelete = new ControlButton("DELETE");
+            var buttonDelete = new Container_Button("DELETE");
             buttonDelete.Click += new EventHandler(buttonClickCallback);
 
             // this.Controls.Remove(Label);
