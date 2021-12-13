@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -46,7 +47,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             return new Label()
             {
                 Text = LabelText,
-                TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                TextAlign = ContentAlignment.MiddleLeft,
                 Dock = DockStyle.Fill
             };
         }

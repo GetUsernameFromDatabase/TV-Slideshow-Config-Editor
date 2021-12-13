@@ -11,34 +11,32 @@ namespace TV_Slideshow_Config_Editor
 {
     public class FlowContainer : FlowLayoutPanel
     {
+        readonly private string Mode;
         protected Button NoOtherControlButton;
         public FlowContainer(string mode = "other")
         {
-            this.FlowDirection = FlowDirection.TopDown;
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.Mode = mode;
+            StyleMe();
+        }
+        private void StyleMe()
+        {
             this.Dock = DockStyle.Fill;
-            ModeStyle(mode);
-        }
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-        private void FlowContainer_GotFocus(object sender, EventArgs e)
-        {
-            this.AutoSize = false; // For performance reasons
-        }
-
-        private void ModeStyle(string mode)
-        {
-            this.GotFocus += FlowContainer_GotFocus;
-            switch (mode)
+            switch (Mode)
             {
                 case "page":
+                    this.AutoSize = false;
                     this.AutoScroll = true;
                     this.FlowDirection = FlowDirection.LeftToRight;
                     break;
                 default:
+                    this.AutoSize = true;
+                    this.FlowDirection = FlowDirection.TopDown;
                     break;
             }
         }
+
         protected void RemoveParent(Control control)
         {
             var btnContainer = control.Parent;

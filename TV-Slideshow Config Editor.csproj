@@ -48,8 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -71,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Config\Container\Container_Button.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Config\Notifications\Schedule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -92,7 +94,7 @@
     <Compile Include="Components\FlowContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Config\Container.cs">
+    <Compile Include="Components\Config\Container\Container.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Config\Notifications\Notifications_Main.cs">
