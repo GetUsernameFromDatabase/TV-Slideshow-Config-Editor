@@ -110,6 +110,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Configurations.cs" />
+    <Compile Include="Logic\JSON_Parsing.cs" />
     <Compile Include="Logic\String_Manipulation.cs" />
     <Compile Include="Components\Config\PropertyEditors\String.cs">
       <SubType>Component</SubType>
@@ -120,7 +121,7 @@
     <Compile Include="Logic\Populate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMenu.cs">
+    <Compile Include="Components\FormMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConfigEditor.cs">
