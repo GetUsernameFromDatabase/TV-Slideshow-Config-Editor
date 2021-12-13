@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Reflection;
 using System.Windows.Forms;
 using TV_Slideshow_Config_Editor.ConfigInterface;
@@ -13,7 +14,8 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 base(new string[2] { "Simple", "Complex" }, property, site)
             {
                 // Needs to be before editors are made
-                var propType = property.GetValue(BoundObj).GetType();
+                var propType = property.GetValue(BoundObj)?.GetType();
+                if (propType == null) property.SetValue(BoundObj, "100%");
                 // Making editors modifies the property value
                 var SimpleHeight = MakeSimpleHeightEditor();
                 var ComplexHeight = MakeComplexHeightEditor();
