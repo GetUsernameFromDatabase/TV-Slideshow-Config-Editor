@@ -84,17 +84,7 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
             foreach (var item in CurrentList)
                 dt.Rows.Add(item);
 
-            var ctrl = new DataGridView()
-            {
-                DataSource = dt,
-                Dock = DockStyle.Fill,
-                Height = 70, // Weird but required
-                ScrollBars = ScrollBars.Both,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                AllowUserToResizeColumns = false,
-                AllowUserToResizeRows = false,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-            };
+            var ctrl = new ListProperty_DataGridView(dt);
             if (RowCheck != null) ctrl.RowPrePaint += DataTable_RowPrePaint;
             // Should be After binding DataTable with DataGridView
             dt.RowChanged += DataTable_RowChanged;
@@ -138,6 +128,22 @@ namespace TV_Slideshow_Config_Editor.ConfigVisualised
                 if (row.Index < DataDisplay.RowCount - 1)
                     DataDisplay.Rows.Remove(row);
             }
+        }
+    }
+
+    public class ListProperty_DataGridView : DataGridView
+    {
+        public ListProperty_DataGridView(DataTable dt)
+        {
+            Dock = DockStyle.Fill;
+            Height = 70; // Weird but required
+            ScrollBars = ScrollBars.Both;
+            SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AllowUserToResizeColumns = false;
+            AllowUserToResizeRows = false;
+            DataSource = dt;
         }
     }
 }
